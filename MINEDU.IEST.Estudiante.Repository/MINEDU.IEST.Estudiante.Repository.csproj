@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MINEDU.IEST.Estudiante.Contexto\MINEDU.IEST.Estudiante.Contexto.csproj" />
+    <ProjectReference Include="..\MINEDU.IEST.Estudiante.Entity\MINEDU.IEST.Estudiante.Entity.csproj" />
+    <ProjectReference Include="..\MINEDU.IEST.Estudiante.Inf-Utils\MINEDU.IEST.Estudiante.Inf-Utils.csproj" />
+  </ItemGroup>
+
+</Project>

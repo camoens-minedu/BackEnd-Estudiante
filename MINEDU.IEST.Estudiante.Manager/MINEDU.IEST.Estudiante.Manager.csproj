@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="EPPlus" Version="6.0.5" />
+    <PackageReference Include="itext7" Version="7.2.2" />
+    <PackageReference Include="MailKit" Version="3.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MINEDU.IEST.Estudiante.Inf-Utils\MINEDU.IEST.Estudiante.Inf-Utils.csproj" />
+    <ProjectReference Include="..\MINEDU.IEST.Estudiante.ManagerDto\MINEDU.IEST.Estudiante.ManagerDto.csproj" />
+    <ProjectReference Include="..\MINEDU.IEST.Estudiante.Repository\MINEDU.IEST.Estudiante.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
