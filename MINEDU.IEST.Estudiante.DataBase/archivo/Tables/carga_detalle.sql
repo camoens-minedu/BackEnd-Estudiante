@@ -1,0 +1,27 @@
+﻿CREATE TABLE [archivo].[carga_detalle] (
+    [ID_DET_ARCHIVO]       INT                  IDENTITY (1, 1) NOT NULL,
+    [ID_CARGA]             [dbo].[ID]           NOT NULL,
+    [ID_TIPO_DOCUMENTO]    [dbo].[ID_ENUMERADO] NULL,
+    [NUMERO_DOCUMENTO]     [dbo].[CODIGO_LARGO] NULL,
+    [APELLIDO_PATERNO]     [dbo].[NOMBRE_CORTO] NULL,
+    [APELLIDO_MATERNO]     [dbo].[NOMBRE_CORTO] NULL,
+    [NOMBRES]              [dbo].[NOMBRE_CORTO] NULL,
+    [ID_SEXO]              [dbo].[ID_ENUMERADO] NULL,
+    [FECHA_NACIMIENTO]     [dbo].[FECHA]        NULL,
+    [ES_DISCAPACITADO]     [dbo].[BOOLEANO]     NULL,
+    [ID_TIPO_DISCAPACIDAD] [dbo].[ID_ENUMERADO] NULL,
+    [UNIDADES_DIDACTICAS]  NVARCHAR (MAX)       NULL,
+    [UBIGEO_NACIMIENTO]    [dbo].[UBIGEO]       NULL,
+    [UBIGEO_RESIDENCIA]    [dbo].[UBIGEO]       NULL,
+    [ID_ESTADO_CIVIL]      [dbo].[ID_ENUMERADO] NULL,
+    [ID_PAIS_NACIMIENTO]   [dbo].[ID]           NULL,
+    [ID_PAIS_RESIDENCIA]   [dbo].[ID]           NULL,
+    [DIRECCION_RESIDENCIA] [dbo].[DIRECCION]    NULL,
+    [ES_CORRECTO]          [dbo].[BOOLEANO]     NOT NULL,
+    [ES_BORRADO]           [dbo].[BOOLEANO]     NOT NULL,
+    [FECHA_CREACION]       [dbo].[FECHA_TIEMPO] NOT NULL,
+    [USUARIO_CREACION]     [dbo].[USUARIO]      NOT NULL,
+    CONSTRAINT [PK_carga_detalle] PRIMARY KEY CLUSTERED ([ID_DET_ARCHIVO] ASC),
+    CONSTRAINT [FK_carga_detalle_carga] FOREIGN KEY ([ID_CARGA]) REFERENCES [archivo].[carga] ([ID_CARGA])
+);
+

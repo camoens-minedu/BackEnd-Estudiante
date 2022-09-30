@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[CORREO]
+    FROM VARCHAR (100) NULL;
+

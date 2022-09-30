@@ -1,0 +1,79 @@
+﻿/**********************************************************************************************************
+AUTOR				:	Juan Tovar
+FECHA DE CREACION	:	18/01/2022
+LLAMADO POR			:
+DESCRIPCION			:	Agrega unidades de competencia para módulos equivalentes
+REVISIONES			:
+-----------------------------------------------------------------------------------------------------------
+VERSIÓN		FECHA MODIF.	USUARIO			DESCRIPCIÓN
+-----------------------------------------------------------------------------------------------------------
+1.0			18/01/2022		JTOVAR			CREACIÓN
+
+TEST:  
+	USP_INSTITUCION_INS_UNIDADES_COMPETENCIA 14,'UC 1 AAA|UC 2 AAA|UC 3 AAA','70557821'
+**********************************************************************************************************/
+CREATE PROCEDURE [dbo].[USP_INSTITUCION_INS_UNIDADES_COMPETENCIA]
+(
+	@ID_MODULO_EQUIVALENCIA INT,
+    @DETALLE_NOMBRE_UNIDAD_COMPETENCIA NVARCHAR(MAX),
+    @USUARIO VARCHAR(8)
+)
+AS
+BEGIN
+	DECLARE @MSG_TRANS VARCHAR(MAX)
+	
+	BEGIN TRY
+
+		SELECT @ID_MODULO_EQUIVALENCIA ID_MODULO_EQUIVALENCIA,SplitData NOMBRE_UNIDAD_COMPETENCIA,ROW_NUMBER() OVER(ORDER BY SplitData) NRO
+		INTO #TmpDetalleUnidadCompetencia
+		FROM dbo.UFN_SPLIT(UPPER(@DETALLE_NOMBRE_UNIDAD_COMPETENCIA), '|')
+
+		BEGIN TRAN TransactSQL
+			
+			DECLARE @I INT = 1
+			DECLARE @TOTAL INT = (SELECT COUNT(1) FROM #TmpDetalleUnidadCompetencia)
+			DECLARE @NOMBRE_UNIDAD_COMPETENCIA NVARCHAR(MAX) = ''
+
+			UPDATE transaccional.modulo_unidad_competencia SET
+				ES_ACTIVO=0,USUARIO_MODIFICACION=@USUARIO,FECHA_MODIFICACION=GETDATE()
+			WHERE ID_MODULO_EQUIVALENCIA=@ID_MODULO_EQUIVALENCIA AND ES_ACTIVO=1
+
+			WHILE (@I <= @TOTAL)
+			BEGIN
+				SELECT @NOMBRE_UNIDAD_COMPETENCIA=NOMBRE_UNIDAD_COMPETENCIA FROM #TmpDetalleUnidadCompetencia WHERE NRO = @I
+
+				IF EXISTS (SELECT ID_UNIDAD_COMPETENCIA
+							FROM transaccional.modulo_unidad_competencia
+							WHERE ID_MODULO_EQUIVALENCIA=@ID_MODULO_EQUIVALENCIA AND NOMBRE_UNIDAD_COMPETENCIA=@NOMBRE_UNIDAD_COMPETENCIA)
+				BEGIN
+					UPDATE transaccional.modulo_unidad_competencia SET
+						ES_ACTIVO=1,USUARIO_MODIFICACION=@USUARIO,FECHA_MODIFICACION=GETDATE()
+					WHERE ID_MODULO_EQUIVALENCIA=@ID_MODULO_EQUIVALENCIA AND NOMBRE_UNIDAD_COMPETENCIA=@NOMBRE_UNIDAD_COMPETENCIA
+                END
+                ELSE BEGIN
+					INSERT INTO transaccional.modulo_unidad_competencia
+						    (ID_MODULO_EQUIVALENCIA,NOMBRE_UNIDAD_COMPETENCIA,ES_ACTIVO,ESTADO,USUARIO_CREACION,FECHA_CREACION)
+					VALUES  (@ID_MODULO_EQUIVALENCIA,@NOMBRE_UNIDAD_COMPETENCIA,1,1,@USUARIO,GETDATE())
+                END
+				SET @I = @I + 1
+			END
+
+			UPDATE transaccional.indicadores_logro SET
+				ES_ACTIVO=0,USUARIO_MODIFICACION=@USUARIO,FECHA_MODIFICACION=GETDATE()
+			WHERE ID_UNIDAD_COMPETENCIA IN (SELECT ID_UNIDAD_COMPETENCIA FROM transaccional.modulo_unidad_competencia WHERE ID_MODULO_EQUIVALENCIA=@ID_MODULO_EQUIVALENCIA AND ES_ACTIVO=0)
+			
+		COMMIT TRAN TransactSQL
+		
+		DROP TABLE #TmpDetalleUnidadCompetencia
+		SELECT 1 AS valor
+
+	END TRY
+
+	BEGIN CATCH
+		ROLLBACK TRAN TransactSQL
+		DECLARE @ERROR_MESSAGE VARCHAR(MAX) = ''
+		SET @ERROR_MESSAGE = ERROR_MESSAGE() + ' -- '
+		SELECT 'Error: ' + @ERROR_MESSAGE
+		SELECT 0 AS valor
+	END CATCH
+END

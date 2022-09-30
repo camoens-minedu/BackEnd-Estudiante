@@ -1,0 +1,22 @@
+﻿CREATE PROCEDURE [dbo].[USP_ADMISION_SEL_MODALIDAD_PROCESO_ADMISION]
+(
+	@ID_PROCESO_ADMISION_PERIODO	INT
+)AS
+BEGIN
+	SELECT 
+	A.ID_PROCESO_ADMISION_PERIODO						IdProcesoAdmision,
+	A.ID_MODALIDADES_POR_PROCESO_ADMISION				IdModalidadProcesoAdmision,
+	M.VALOR_ENUMERADO									Modalidad,
+	M.ID_ENUMERADO										IdModalidad,
+	A.FECHA_INICIO_MODALIDAD							FechaInicioModalidad,
+	A.FECHA_FIN_MODALIDAD								FechaFinModalidad,
+	A.FECHA_FIN_REGISTRO								FechaFinPostulante
+	FROM transaccional.modalidades_por_proceso_admision A
+	INNER JOIN sistema.enumerado M ON A.ID_MODALIDAD = M.ID_ENUMERADO
+	WHERE ID_PROCESO_ADMISION_PERIODO = @ID_PROCESO_ADMISION_PERIODO 
+	AND A.ES_ACTIVO = 1
+	order by M.ID_ENUMERADO
+END
+GO
+
+

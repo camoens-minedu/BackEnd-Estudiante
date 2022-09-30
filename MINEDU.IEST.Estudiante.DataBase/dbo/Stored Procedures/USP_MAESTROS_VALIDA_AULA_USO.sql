@@ -1,0 +1,16 @@
+﻿CREATE PROCEDURE [dbo].[USP_MAESTROS_VALIDA_AULA_USO]
+(  
+@ID_AULA INT
+)  
+AS  
+BEGIN  
+ SET NOCOUNT ON;   
+ 
+ SELECT TOP 1 ID_SESION_PROGRAMACION_CLASE FROM transaccional.sesion_programacion_clase
+ WHERE ID_AULA = @ID_AULA
+
+
+END
+GO
+
+

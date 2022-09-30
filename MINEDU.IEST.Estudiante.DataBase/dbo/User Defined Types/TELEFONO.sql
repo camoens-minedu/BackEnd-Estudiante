@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[TELEFONO]
+    FROM VARCHAR (15) NULL;
+

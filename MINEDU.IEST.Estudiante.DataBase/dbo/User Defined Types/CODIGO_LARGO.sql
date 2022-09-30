@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[CODIGO_LARGO]
+    FROM VARCHAR (16) NULL;
+

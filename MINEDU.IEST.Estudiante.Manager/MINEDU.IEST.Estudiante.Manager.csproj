@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -17,6 +17,10 @@
     <ProjectReference Include="..\MINEDU.IEST.Estudiante.Inf-Utils\MINEDU.IEST.Estudiante.Inf-Utils.csproj" />
     <ProjectReference Include="..\MINEDU.IEST.Estudiante.ManagerDto\MINEDU.IEST.Estudiante.ManagerDto.csproj" />
     <ProjectReference Include="..\MINEDU.IEST.Estudiante.Repository\MINEDU.IEST.Estudiante.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Documents\" />
   </ItemGroup>
 
 </Project>

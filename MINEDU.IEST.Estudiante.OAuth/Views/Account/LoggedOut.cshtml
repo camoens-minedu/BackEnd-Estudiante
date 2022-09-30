@@ -1,0 +1,34 @@
+﻿@model LoggedOutViewModel
+
+@{ 
+    // set this so the layout rendering sees an anonymous user
+    ViewData["signed-out"] = true;
+}
+
+<div class="logged-out-page">
+    <h1>
+        Cerrar Sesión
+        <small>Ahora esta desconectado</small>
+    </h1>
+
+    @if (Model.PostLogoutRedirectUri != null)
+    {
+        <div>
+            Haga click <a class="PostLogoutRedirectUri" href="@Model.PostLogoutRedirectUri">aquí</a> para volver a la aplicación: 
+            <span>@Model.ClientName</span>.
+        </div>
+    }
+
+    @if (Model.SignOutIframeUrl != null)
+    {
+        <iframe width="0" height="0" class="signout" src="@Model.SignOutIframeUrl"></iframe>
+    }
+</div>
+
+@section scripts
+{
+    @if (Model.AutomaticRedirectAfterSignOut)
+    {
+        <script src="~/js/signout-redirect.js"></script>
+    }
+}

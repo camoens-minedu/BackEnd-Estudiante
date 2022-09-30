@@ -2,10 +2,10 @@
 using MINEDU.IEST.Estudiante.Manager.Maestra;
 using MINEDU.IEST.Estudiante.ManagerDto.Maestra;
 
-
 namespace MINEDU.IEST.Estudiante.WebApiEst.Controllers
 {
     [ApiController]
+    //[Audit]
     public class MaestraController : BaseController
     {
         private readonly IMaestraManager maestraManager;

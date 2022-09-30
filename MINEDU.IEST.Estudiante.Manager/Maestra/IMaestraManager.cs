@@ -1,4 +1,5 @@
-﻿using MINEDU.IEST.Estudiante.ManagerDto.Maestra;
+﻿using MINEDU.IEST.Estudiante.Inf_Utils.Enumerados;
+using MINEDU.IEST.Estudiante.ManagerDto.Maestra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace MINEDU.IEST.Estudiante.Manager.Maestra
         #region Sistemas
 
         Task<List<GetTipoEnumeradoDto>> GetListEnumerado();
+        Task<Dictionary<EnumeradoCabecera, List<GetEnumeradoComboDto>>> GetListEnumeradoByGrupo(List<EnumeradoCabecera> listaMaestra);
 
         #endregion
     }

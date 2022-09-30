@@ -8,8 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Enumerados\" />
-    <Folder Include="Helpers\" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="MailKit" Version="3.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 
 </Project>

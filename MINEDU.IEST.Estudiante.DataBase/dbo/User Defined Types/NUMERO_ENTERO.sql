@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[NUMERO_ENTERO]
+    FROM INT NULL;
+

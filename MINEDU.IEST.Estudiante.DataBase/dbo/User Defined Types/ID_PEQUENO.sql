@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[ID_PEQUENO]
+    FROM SMALLINT NULL;
+

@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[NOMBRE_CORTO]
+    FROM VARCHAR (50) NULL;
+

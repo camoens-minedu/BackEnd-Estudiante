@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[ID_ENUMERADO]
+    FROM INT NOT NULL;
+

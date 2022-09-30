@@ -1,0 +1,15 @@
+﻿CREATE TABLE [maestro].[familia_productiva] (
+    [ID_FAMILIA_PRODUCTIVA]          [dbo].[ID]           IDENTITY (1, 1) NOT NULL,
+    [ID_SECTOR]                      [dbo].[ID]           NOT NULL,
+    [CODIGO_FAMILIA_PRODUCTIVA]      [dbo].[CODIGO_CORTO] NOT NULL,
+    [NOMBRE_FAMILIA_PRODUCTIVA]      [dbo].[NOMBRE_LARGO] NOT NULL,
+    [DESCRIPCION_FAMILIA_PRODUCTIVA] [dbo].[DESCRIPCION]  NULL,
+    [ESTADO]                         [dbo].[ESTADO]       NOT NULL,
+    [USUARIO_CREACION]               [dbo].[USUARIO]      NOT NULL,
+    [FECHA_CREACION]                 [dbo].[FECHA_TIEMPO] NOT NULL,
+    [USUARIO_MODIFICACION]           [dbo].[USUARIO]      NULL,
+    [FECHA_MODIFICACION]             [dbo].[FECHA_TIEMPO] NULL,
+    CONSTRAINT [PK_FAMILIA_PRODUCTIVA] PRIMARY KEY NONCLUSTERED ([ID_FAMILIA_PRODUCTIVA] ASC),
+    CONSTRAINT [FK_FAMILIA__FK_SECTOR_SECTOR] FOREIGN KEY ([ID_SECTOR]) REFERENCES [maestro].[sector] ([ID_SECTOR])
+);
+

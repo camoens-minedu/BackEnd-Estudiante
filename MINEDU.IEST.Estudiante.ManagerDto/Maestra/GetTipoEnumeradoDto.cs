@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MINEDU.IEST.Estudiante.ManagerDto.Maestra
+﻿namespace MINEDU.IEST.Estudiante.ManagerDto.Maestra
 {
     public class GetTipoEnumeradoDto
     {

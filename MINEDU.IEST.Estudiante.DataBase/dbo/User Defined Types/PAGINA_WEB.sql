@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[PAGINA_WEB]
+    FROM VARCHAR (50) NULL;
+

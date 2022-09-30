@@ -1,0 +1,3 @@
+﻿CREATE SCHEMA [MINEDU\jtovar]
+    AUTHORIZATION [MINEDU\jtovar];
+

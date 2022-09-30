@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[UBIGEO]
+    FROM VARCHAR (6) NULL;
+

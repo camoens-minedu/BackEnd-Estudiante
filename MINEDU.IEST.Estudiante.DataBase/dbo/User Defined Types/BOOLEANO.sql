@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[BOOLEANO]
+    FROM BIT NULL;
+

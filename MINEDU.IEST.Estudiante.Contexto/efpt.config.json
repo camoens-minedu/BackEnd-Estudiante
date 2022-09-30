@@ -1,0 +1,67 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "SecurityApiDbContext",
+   "ContextNamespace": "Contexto.Data.SecurityApi",
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": "Entity.SecurityApi",
+   "OutputContextPath": "Data\\SecurityApi",
+   "OutputPath": "Data\\SecurityApi\\Entity",
+   "ProjectRootNamespace": "MINEDU.IEST.Estudiante",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[maestro].[persona]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Security].[RoleClaims]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Security].[Roles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Security].[UserClaims]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Security].[UserLogins]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Security].[UserRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Security].[Users]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Security].[UserTokens]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "aasrvbd005.db_regia_5.dbo",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}

@@ -1,4 +1,6 @@
-﻿namespace MINEDU.IEST.Estudiante.Entity
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MINEDU.IEST.Estudiante.Entity
 {
     public partial class persona_institucion
     {
@@ -31,8 +33,20 @@
 
         public carrera_profesional? ID_CARRERA_PROFESIONALNavigation { get; set; }
         public persona ID_PERSONANavigation { get; set; }
-        public ICollection<estudiante_institucion> estudiante_institucion { get; set; }
-        public ICollection<personal_institucion> personal_institucion { get; set; }
-        public ICollection<postulantes_por_modalidad> postulantes_por_modalidad { get; set; }
+        public List<estudiante_institucion> estudiante_institucion { get; set; }
+        public List<personal_institucion> personal_institucion { get; set; }
+        public List<postulantes_por_modalidad> postulantes_por_modalidad { get; set; }
+
+
+        #region Adicionales
+        [NotMapped]
+        public int IdCarrera { get; set; }
+        [NotMapped]
+        public string NombrePlanEstudio { get; set; }
+        [NotMapped]
+        public DateTime fechaNacimiento { get; set; }
+        [NotMapped] 
+        public string codigoEstudiante { get; set; }
+        #endregion
     }
 }
