@@ -17,7 +17,7 @@ namespace MINEDU.IEST.Estudiante.Repository.InformacionPersonal
         public async Task<persona> GetPersonaAlumno(int idPersona, int idPersonaInstitucion)
         {
             var query = _context.persona
-                    .Where(p=>p.ID_PERSONA==idPersona)
+                    .Where(p => p.ID_PERSONA == idPersona)
                     .Select(p => new persona
                     {
                         ID_PERSONA = p.ID_PERSONA,
@@ -31,6 +31,7 @@ namespace MINEDU.IEST.Estudiante.Repository.InformacionPersonal
                         ID_LENGUA_MATERNA = p.ID_LENGUA_MATERNA,
                         ES_DISCAPACITADO = p.ES_DISCAPACITADO,
                         PAIS_NACIMIENTO = p.PAIS_NACIMIENTO,
+                        UBIGEO_NACIMIENTO = p.UBIGEO_NACIMIENTO,
                         persona_institucion = p.persona_institucion.Select(pi => new persona_institucion
                         {
                             ID_PERSONA_INSTITUCION = pi.ID_PERSONA_INSTITUCION,
@@ -44,7 +45,7 @@ namespace MINEDU.IEST.Estudiante.Repository.InformacionPersonal
                             CELULAR2 = pi.CELULAR2,
                             ID_TIPO_DISCAPACIDAD = pi.ID_TIPO_DISCAPACIDAD
                         })
-                        .Where(p=>p.ID_PERSONA_INSTITUCION ==idPersonaInstitucion)
+                        .Where(p => p.ID_PERSONA_INSTITUCION == idPersonaInstitucion)
                         .ToList(),
                     });
             return await query.FirstOrDefaultAsync();
@@ -92,6 +93,8 @@ namespace MINEDU.IEST.Estudiante.Repository.InformacionPersonal
                                     ARCHIVO_FOTO = ei.ARCHIVO_FOTO,
                                     ARCHIVO_RUTA = ei.ARCHIVO_RUTA,
                                     ID_INSTITUCION_BASICA = ei.ID_INSTITUCION_BASICA,
+                                    ESTADO = ei.ESTADO,
+                                    ID_SEMESTRE_ACADEMICO = ei.ID_SEMESTRE_ACADEMICO,
                                     ID_INSTITUCION_BASICANavigation = new institucion_basica
                                     {
                                         ID_TIPO_INSTITUCION_BASICA = ei.ID_INSTITUCION_BASICANavigation.ID_TIPO_INSTITUCION_BASICA,
@@ -102,7 +105,12 @@ namespace MINEDU.IEST.Estudiante.Repository.InformacionPersonal
                                     ID_PERIODOS_LECTIVOS_POR_INSTITUCIONNavigation = new periodos_lectivos_por_institucion
                                     {
                                         ID_PERIODOS_LECTIVOS_POR_INSTITUCION = ei.ID_PERIODOS_LECTIVOS_POR_INSTITUCION,
-                                        NOMBRE_PERIODO_LECTIVO_INSTITUCION = ei.ID_PERIODOS_LECTIVOS_POR_INSTITUCIONNavigation.NOMBRE_PERIODO_LECTIVO_INSTITUCION
+                                        NOMBRE_PERIODO_LECTIVO_INSTITUCION = ei.ID_PERIODOS_LECTIVOS_POR_INSTITUCIONNavigation.NOMBRE_PERIODO_LECTIVO_INSTITUCION,
+                                        ID_PERIODO_LECTIVONavigation = new periodo_lectivo
+                                        {
+                                            ID_PERIODO_LECTIVO =  ei.ID_PERIODOS_LECTIVOS_POR_INSTITUCIONNavigation.ID_PERIODO_LECTIVO,
+                                            CODIGO_PERIODO_LECTIVO =  ei.ID_PERIODOS_LECTIVOS_POR_INSTITUCIONNavigation.ID_PERIODO_LECTIVONavigation.CODIGO_PERIODO_LECTIVO
+                                        }
                                     },
                                     ID_TURNOS_POR_INSTITUCIONNavigation = new turnos_por_institucion
                                     {
@@ -129,7 +137,9 @@ namespace MINEDU.IEST.Estudiante.Repository.InformacionPersonal
         public async Task<persona> GetPersonaInstitucionValidate(int tipoDocumento, string nroDocumento, string correo)
         {
             var query = _context.persona
-                .Where(p => p.ID_TIPO_DOCUMENTO == tipoDocumento && p.NUMERO_DOCUMENTO_PERSONA == nroDocumento)
+                .Where(p => p.ID_TIPO_DOCUMENTO == tipoDocumento
+                && p.NUMERO_DOCUMENTO_PERSONA == nroDocumento
+                && p.persona_institucion.FirstOrDefault().CORREO.ToUpper() == correo.ToUpper())
                 .Select(p => new persona
                 {
                     ID_PERSONA = p.ID_PERSONA,
@@ -139,12 +149,13 @@ namespace MINEDU.IEST.Estudiante.Repository.InformacionPersonal
                     APELLIDO_MATERNO_PERSONA = p.APELLIDO_MATERNO_PERSONA,
                     NOMBRE_PERSONA = p.NOMBRE_PERSONA,
                     persona_institucion = p.persona_institucion
-                    .Select(c => new persona_institucion { CORREO = c.CORREO })
-                    .Where(p => p.CORREO == correo).ToList()
+                                        .Select(c => new persona_institucion { ID_PERSONA = p.ID_PERSONA, CORREO = c.CORREO }).ToList()
                 });
 
-            return await query.FirstOrDefaultAsync();
+            return await query.FirstOrDefaultAsync() ?? new persona();
         }
+
+
 
         public async Task<List<persona_institucion>> GetPersonaIntitucionLogin(int idPersona)
         {
@@ -154,7 +165,8 @@ namespace MINEDU.IEST.Estudiante.Repository.InformacionPersonal
                             {
                                 ID_PERSONA_INSTITUCION = p.ID_PERSONA_INSTITUCION,
                                 ID_PERSONA = p.ID_PERSONA,
-                                ID_INSTITUCION = p.ID_INSTITUCION
+                                ID_INSTITUCION = p.ID_INSTITUCION,
+
                             });
             return await query.ToListAsync();
 
@@ -169,6 +181,43 @@ namespace MINEDU.IEST.Estudiante.Repository.InformacionPersonal
                             ID_ESTUDIANTE_INSTITUCION = p.ID_ESTUDIANTE_INSTITUCION,
                             ID_PERSONA_INSTITUCION = p.ID_PERSONA_INSTITUCION,
                             ID_CARRERAS_POR_INSTITUCION_DETALLE = p.ID_CARRERAS_POR_INSTITUCION_DETALLE,
+                            ID_PLAN_ESTUDIO = p.ID_PLAN_ESTUDIO,
+                            ID_SEMESTRE_ACADEMICO = p.ID_SEMESTRE_ACADEMICO,
+                            ID_PERIODOS_LECTIVOS_POR_INSTITUCION = p.ID_PERIODOS_LECTIVOS_POR_INSTITUCION,
+                            ARCHIVO_FOTO = p.ARCHIVO_FOTO,
+                            ARCHIVO_RUTA = p.ARCHIVO_RUTA,
+                            ID_CARRERAS_POR_INSTITUCION_DETALLENavigation = new carreras_por_institucion_detalle
+                            {
+                                ID_CARRERAS_POR_INSTITUCION_DETALLE = p.ID_CARRERAS_POR_INSTITUCION_DETALLE,
+                                ID_CARRERAS_POR_INSTITUCIONNavigation = new carreras_por_institucion
+                                {
+                                    ID_CARRERA = p.ID_CARRERAS_POR_INSTITUCION_DETALLENavigation.ID_CARRERAS_POR_INSTITUCIONNavigation.ID_CARRERA
+                                },
+                                ID_SEDE_INSTITUCIONNavigation = new sede_institucion
+                                {
+                                    ID_SEDE_INSTITUCION = p.ID_CARRERAS_POR_INSTITUCION_DETALLENavigation.ID_SEDE_INSTITUCION
+                                },
+                                ID_SEDE_INSTITUCION = p.ID_CARRERAS_POR_INSTITUCION_DETALLENavigation.ID_SEDE_INSTITUCION,
+                            }
+                        });
+
+            return await query.ToListAsync();
+        }
+
+
+
+        public async Task<estudiante_institucion> GetListEstudianteInstitucion(int idInstitucion, int idEstudiante)
+        {
+            var query = _context.estudiante_institucion
+                        .Where(p => p.ID_PERSONA_INSTITUCION == idInstitucion && p.ID_ESTUDIANTE_INSTITUCION == idEstudiante)
+                        .Select(p => new estudiante_institucion
+                        {
+                            ID_ESTUDIANTE_INSTITUCION = p.ID_ESTUDIANTE_INSTITUCION,
+                            ID_PERSONA_INSTITUCION = p.ID_PERSONA_INSTITUCION,
+                            ID_CARRERAS_POR_INSTITUCION_DETALLE = p.ID_CARRERAS_POR_INSTITUCION_DETALLE,
+                            ID_PLAN_ESTUDIO = p.ID_PLAN_ESTUDIO,
+                            ID_SEMESTRE_ACADEMICO = p.ID_SEMESTRE_ACADEMICO,
+                            ID_PERIODOS_LECTIVOS_POR_INSTITUCION = p.ID_PERIODOS_LECTIVOS_POR_INSTITUCION,
                             ID_CARRERAS_POR_INSTITUCION_DETALLENavigation = new carreras_por_institucion_detalle
                             {
                                 ID_CARRERAS_POR_INSTITUCION_DETALLE = p.ID_CARRERAS_POR_INSTITUCION_DETALLE,
@@ -179,9 +228,21 @@ namespace MINEDU.IEST.Estudiante.Repository.InformacionPersonal
                             }
                         });
 
-            return await query.ToListAsync();
+            return await query.FirstOrDefaultAsync();
         }
 
 
+
+        public async Task<string> GetPeriodoLectivoIngreso(int idPeriodoLectivoPorInstitucion)
+        {
+            var query = _context.periodos_lectivos_por_institucion
+                        .Where(c => c.ID_PERIODOS_LECTIVOS_POR_INSTITUCION == idPeriodoLectivoPorInstitucion)
+                        .Select(p => new periodos_lectivos_por_institucion
+                        {
+                            ID_PERIODO_LECTIVO = p.ID_PERIODO_LECTIVO,
+                            ID_PERIODO_LECTIVONavigation = p.ID_PERIODO_LECTIVONavigation,
+                        });
+            return (await query.FirstOrDefaultAsync()).ID_PERIODO_LECTIVONavigation.CODIGO_PERIODO_LECTIVO.ToString();
+        }
     }
 }

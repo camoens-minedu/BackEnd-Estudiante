@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using MINEDU.IEST.Estudiante.Entity.Security;
 using System;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace IdentityServerHost.Quickstart.UI
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
+        private readonly IConfiguration _configuration;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -37,7 +39,7 @@ namespace IdentityServerHost.Quickstart.UI
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
-            IEventService events)
+            IEventService events, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -45,6 +47,7 @@ namespace IdentityServerHost.Quickstart.UI
             _clientStore = clientStore;
             _schemeProvider = schemeProvider;
             _events = events;
+            this._configuration = configuration;
         }
 
         /// <summary>
@@ -62,6 +65,7 @@ namespace IdentityServerHost.Quickstart.UI
                 return RedirectToAction("Challenge", "External", new { scheme = vm.ExternalLoginScheme, returnUrl });
             }
 
+            
             return View(vm);
         }
 
@@ -207,6 +211,21 @@ namespace IdentityServerHost.Quickstart.UI
         {
             return View();
         }
+
+        public ActionResult RedirectToApp()
+        {
+            var urlApp= _configuration["urlAppEstudiante:validacion"].ToString();
+
+            return Redirect(urlApp);
+        }
+
+        public ActionResult RedirectToForgot()
+        {
+            var urlApp = _configuration["urlAppEstudiante:forgot"].ToString();
+
+            return Redirect(urlApp);
+        }
+
 
 
         /*****************************************/

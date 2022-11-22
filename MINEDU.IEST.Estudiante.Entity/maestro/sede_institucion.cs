@@ -30,14 +30,14 @@ namespace MINEDU.IEST.Estudiante.Entity
         public string? ARCHIVO_RESOLUCION { get; set; }
         public string? ARCHIVO_RUTA { get; set; }
 
-        public  ICollection<aula> aula { get; set; }
-        public  ICollection<carga> carga { get; set; }
-        public  ICollection<carreras_por_institucion_detalle> carreras_por_institucion_detalle { get; set; }
-        public  ICollection<examen_admision_sede> examen_admision_sede { get; set; }
-        public  ICollection<meta_carrera_institucion_detalle> meta_carrera_institucion_detalle { get; set; }
-        public  ICollection<programacion_clase> programacion_clase { get; set; }
-        public  ICollection<promover_persona_institucion> promover_persona_institucion { get; set; }
-        public  ICollection<resoluciones_por_carreras_por_institucion> resoluciones_por_carreras_por_institucion { get; set; }
-        public  ICollection<situacion_academica_estudiante> situacion_academica_estudiante { get; set; }
+        public  List<aula> aula { get; set; }
+        public  List<carga> carga { get; set; }
+        public  List<carreras_por_institucion_detalle> carreras_por_institucion_detalle { get; set; }
+        public  List<examen_admision_sede> examen_admision_sede { get; set; }
+        public  List<meta_carrera_institucion_detalle> meta_carrera_institucion_detalle { get; set; }
+        public  List<programacion_clase> programacion_clase { get; set; }
+        public  List<promover_persona_institucion> promover_persona_institucion { get; set; }
+        public  List<resoluciones_por_carreras_por_institucion> resoluciones_por_carreras_por_institucion { get; set; }
+        public  List<situacion_academica_estudiante> situacion_academica_estudiante { get; set; }
     }
 }

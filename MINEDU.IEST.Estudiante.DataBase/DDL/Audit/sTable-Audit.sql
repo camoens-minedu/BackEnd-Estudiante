@@ -1,6 +1,6 @@
-﻿use db_regia_5
+﻿-- use db_regia_5
 
-go
+-- go
 
 
 

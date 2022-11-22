@@ -7,5 +7,7 @@
         public string ProvinciaUbigeo { get; set; }
         public string DistritoUbigeo { get; set; }
         public string CodigoUbigeoReniec { get; set; }
+
+        public string nombreFull { get; set; }
     }
 }

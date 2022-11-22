@@ -64,5 +64,41 @@ namespace MINEDU.IEST.Estudiante.Repository.StoreProcedure
         }
 
 
+        #region Reportes
+
+        public async Task<List<USP_MATRICULA_RPT_BOLETA_NOTASResult>> GetBoletasNotas(int ID_MATRICULA_ESTUDIANTE, int ID_PERIODOS_LECTIVOS_POR_INSTITUCION)
+        {
+            var procedureName = "USP_MATRICULA_RPT_BOLETA_NOTAS";
+            var parameters = new DynamicParameters();
+            parameters.Add("ID_MATRICULA_ESTUDIANTE", ID_MATRICULA_ESTUDIANTE, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ID_PERIODOS_LECTIVOS_POR_INSTITUCION", ID_PERIODOS_LECTIVOS_POR_INSTITUCION, DbType.Int32, ParameterDirection.Input);
+
+            var qResult = await _database.GetAll<USP_MATRICULA_RPT_BOLETA_NOTASResult>(procedureName, parameters, CommandType.StoredProcedure);
+            return qResult;
+        }
+
+        public async Task<List<USP_EVALUACION_SEL_LISTA_HISTORIAL_ACADEMICO_ESTUDIANTEResult>> GetHistorialAcademico(int ID_INSTITUCION, int ID_TIPO_DOCUMENTO, string ID_NUMERO_DOCUMENTO, int ID_SEDE_INSTITUCION, int ID_CARRERA, int ID_PLAN_ESTUDIO, int ID_PERIODO_LECTIVO_INSTITUCION)
+        {
+            var procedureName = "USP_EVALUACION_SEL_LISTA_HISTORIAL_ACADEMICO_ESTUDIANTE";
+            //var procedureName = "USP_EVALUACION_SEL_LISTA_HISTORIAL_ACADEMICO_ESTUDIANTE_test_ilozano";
+            var parameters = new DynamicParameters();
+            parameters.Add("@ID_INSTITUCION", ID_INSTITUCION, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ID_TIPO_DOCUMENTO", ID_TIPO_DOCUMENTO, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ID_NUMERO_DOCUMENTO", ID_NUMERO_DOCUMENTO, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ID_SEDE_INSTITUCION", ID_SEDE_INSTITUCION, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ID_CARRERA", ID_CARRERA, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ID_PLAN_ESTUDIO", ID_PLAN_ESTUDIO, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ID_PERIODO_LECTIVO_INSTITUCION", ID_PERIODO_LECTIVO_INSTITUCION, DbType.Int32, ParameterDirection.Input);
+
+            var qResult = await _database.GetAll<USP_EVALUACION_SEL_LISTA_HISTORIAL_ACADEMICO_ESTUDIANTEResult>(procedureName, parameters, CommandType.StoredProcedure);
+            return qResult;
+        }
+
+
+
+        #endregion
+
     }
 }
+
+

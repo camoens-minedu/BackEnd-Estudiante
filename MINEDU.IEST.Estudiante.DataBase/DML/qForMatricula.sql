@@ -110,3 +110,16 @@ go
 select u.Id_Persona,u.* from Security.Users u
 
 select * from Security.UserLogins
+go
+
+
+sp_helptext USP_MATRICULA_SEL_UNIDADES_DIDACTICAS_PAGINADO
+
+go
+
+select top 10 * from transaccional.programacion_matricula where ID_PERIODOS_LECTIVOS_POR_INSTITUCION = 3906 and ID_TIPO_MATRICULA = 185
+select top 10 * from sistema.enumerado where ID_ENUMERADO = 185
+select top 10 * from sistema.enumerado where ID_TIPO_ENUMERADO = 58
+
+
+go

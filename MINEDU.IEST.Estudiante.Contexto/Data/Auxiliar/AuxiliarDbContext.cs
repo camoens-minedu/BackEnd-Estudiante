@@ -20,6 +20,7 @@ namespace MINEDU.IEST.Estudiante.Contexto.Data.Auxiliar
         public virtual DbSet<UbigeoAuxiliar> TblUbigeos { get; set; }
         public virtual DbSet<UvwCarrera> UvwCarreras { get; set; }
         public virtual DbSet<UvwInstitucion> UvwInstitucions { get; set; }
+        public virtual DbSet<UvwUbigeoReniec> UbigeoReniec { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +28,7 @@ namespace MINEDU.IEST.Estudiante.Contexto.Data.Auxiliar
             modelBuilder.ApplyConfiguration(new Configurations.TblUbigeoConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.UvwCarreraConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.UvwInstitucionConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.UbigeoReniecConfiguration());
 
             OnModelCreatingPartial(modelBuilder);
         }

@@ -8,5 +8,6 @@ namespace MINEDU.IEST.Estudiante.Repository.Maestra
     {
         Task<List<enumerado>> GetListEnumeradosSistema();
         Task<Dictionary<EnumeradoCabecera, List<enumerado>>> GetListEnumeradoByGrupo(List<EnumeradoCabecera> listaMaestra);
+        sede_institucion GetSedeInstitucionByIdCarreraInstitucionDetalle(int idCarInstitucionDetalle);
     }
 }

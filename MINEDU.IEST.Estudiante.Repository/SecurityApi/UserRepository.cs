@@ -84,8 +84,16 @@ namespace MINEDU.IEST.Estudiante.Repository.SecurityApi
         {
             User user = _context.Users.Where(u => u.UserName == userName).FirstOrDefault();
             user.PasswordHash = PasswordHasher.HashPassword(newPassword);
-
+            
             return user;
+        }
+
+        public async Task<bool> claveCompare(string clave, int idPersona)
+        {
+            var query = await _context.Users.FirstOrDefaultAsync(p => p.Id_Persona == idPersona);
+            var claveHash = PasswordHasher.HashPassword(clave);
+            return claveHash == query.PasswordHash;
+
         }
 
         public async Task<User> GetUserByIdPersona(int idPersona) => await _context.Users.FirstOrDefaultAsync(p => p.Id_Persona == idPersona);

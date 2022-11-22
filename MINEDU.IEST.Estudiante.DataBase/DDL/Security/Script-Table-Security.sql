@@ -30,6 +30,7 @@ CREATE TABLE [Security].[Users] (
     [LockoutEnd] datetimeoffset NULL,
     [LockoutEnabled] bit NOT NULL,
     [AccessFailedCount] int NOT NULL,
+    Id_Persona int not null
     CONSTRAINT [PK_Users] PRIMARY KEY ([Id])
 );
 GO

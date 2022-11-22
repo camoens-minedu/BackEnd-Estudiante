@@ -22,4 +22,13 @@ go
 
 update maestro.persona_institucion
 set CORREO = 'camoens1@outlook.com'
-where ID_PERSONA= 150103
+where ID_PERSONA= 206769
+
+go
+
+
+----------------
+
+update transaccional.programacion_matricula
+	set FECHA_INICIO = '2022-10-01', FECHA_FIN = '2022-10-10'
+where ID_PROGRAMACION_MATRICULA = 4248

@@ -39,14 +39,14 @@ namespace MINEDU.IEST.Estudiante.Entity
 
         public  modulo ID_MODULONavigation { get; set; } = null!;
         public  tipo_unidad_didactica? ID_TIPO_UNIDAD_DIDACTICANavigation { get; set; }
-        public  ICollection<convalidacion_detalle> convalidacion_detalle { get; set; }
-        public  ICollection<evaluacion_extraordinaria_detalle> evaluacion_extraordinaria_detalle { get; set; }
-        public  ICollection<indicadores_logro_por_unidad_didactica> indicadores_logro_por_unidad_didactica { get; set; }
-        public  ICollection<pre_requisitos_por_unidad_didactica> pre_requisitos_por_unidad_didacticaID_UNIDAD_DIDACTICANavigation { get; set; }
-        public  ICollection<pre_requisitos_por_unidad_didactica> pre_requisitos_por_unidad_didacticaID_UNIDAD_DIDACTICA_PRE_REQUISITONavigation { get; set; }
-        public  ICollection<situacion_academica_detalle> situacion_academica_detalle { get; set; }
-        public  ICollection<unidad_didactica_detalle> unidad_didactica_detalle { get; set; }
-        public  ICollection<unidad_didactica_modulo_equivalencia> unidad_didactica_modulo_equivalencia { get; set; }
-        public  ICollection<unidades_didacticas_por_enfoque> unidades_didacticas_por_enfoque { get; set; }
+        public  List<convalidacion_detalle> convalidacion_detalle { get; set; }
+        public  List<evaluacion_extraordinaria_detalle> evaluacion_extraordinaria_detalle { get; set; }
+        public  List<indicadores_logro_por_unidad_didactica> indicadores_logro_por_unidad_didactica { get; set; }
+        public  List<pre_requisitos_por_unidad_didactica> pre_requisitos_por_unidad_didacticaID_UNIDAD_DIDACTICANavigation { get; set; }
+        public  List<pre_requisitos_por_unidad_didactica> pre_requisitos_por_unidad_didacticaID_UNIDAD_DIDACTICA_PRE_REQUISITONavigation { get; set; }
+        public  List<situacion_academica_detalle> situacion_academica_detalle { get; set; }
+        public  List<unidad_didactica_detalle> unidad_didactica_detalle { get; set; }
+        public  List<unidad_didactica_modulo_equivalencia> unidad_didactica_modulo_equivalencia { get; set; }
+        public  List<unidades_didacticas_por_enfoque> unidades_didacticas_por_enfoque { get; set; }
     }
 }

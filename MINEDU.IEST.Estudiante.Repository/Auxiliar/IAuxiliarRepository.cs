@@ -8,5 +8,7 @@ namespace MINEDU.IEST.Estudiante.Repository.Auxiliar
         Task<UvwInstitucion> GetInstitucion(int idInstitucion);
         Task<PaisAuxiliar> GetPaisAuxiliarByCodigo(string codigo);
         Task<UbigeoAuxiliar> GetUbigeoAuxiliarById(string id);
+        Task<List<UvwUbigeoReniec>> GetUbigeoReniecByFitro(string fitro);
+        Task<UvwUbigeoReniec> GetUbigeoReniecById(string id);
     }
 }

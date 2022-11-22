@@ -11,6 +11,7 @@ using MINEDU.IEST.Estudiante.Manager.Auxiliar;
 using MINEDU.IEST.Estudiante.Manager.InformacionPersonal;
 using MINEDU.IEST.Estudiante.Manager.Maestra;
 using MINEDU.IEST.Estudiante.Manager.PreMatricula;
+using MINEDU.IEST.Estudiante.Manager.Reporte;
 using MINEDU.IEST.Estudiante.Manager.SecurityApi;
 using MINEDU.IEST.Estudiante.Manager.StoreProcedure;
 using MINEDU.IEST.Estudiante.Repository.Audit;
@@ -19,6 +20,7 @@ using MINEDU.IEST.Estudiante.Repository.DigePadron;
 using MINEDU.IEST.Estudiante.Repository.InformacionPersonal;
 using MINEDU.IEST.Estudiante.Repository.Maestra;
 using MINEDU.IEST.Estudiante.Repository.PreMatricula;
+using MINEDU.IEST.Estudiante.Repository.Reporte;
 using MINEDU.IEST.Estudiante.Repository.SecurityApi;
 using MINEDU.IEST.Estudiante.Repository.StoreProcedure;
 using MINEDU.IEST.Estudiante.Repository.UnitOfWork;
@@ -42,9 +44,12 @@ namespace MINEDU.IEST.Estudiante.Inf_Apis.Extension
             services.AddScoped<IInformacionPersonaRepository, InformacionPersonaRepository>();
             services.AddScoped<IPreMatriculaRepository, PreMatriculaRepository>();
             services.AddScoped<IProgramacionMatriculaRepository, ProgramacionMatriculaRepository>();
+            services.AddScoped<IReporteRepository, ReporteRepository>();
+
             services.AddScoped<MaestrasUnitOfWork>();
             services.AddScoped<InformacionPersonaUnitOfWork>();
             services.AddScoped<PreMatriculaUnitOfWork>();
+            services.AddScoped<ReporteUnitOfWork>();
 
             services.AddDbContext<estudianteContext>(opt =>
             {
@@ -93,6 +98,7 @@ namespace MINEDU.IEST.Estudiante.Inf_Apis.Extension
             services.AddScoped<IPreMatriculaManager, PreMatriculaManager>();
             services.AddScoped<IStoreProcedureManager, StoreProcedureManager>();
             services.AddScoped<ISecurityApiManager, SecurityApiManager>();
+            services.AddScoped<IReporteManager, ReporteManager>();
 
             return services;
 

@@ -25,29 +25,69 @@ namespace MINEDU.IEST.Estudiante.WebApiEst.Controllers
         {
             return Ok(await _preMatriculaManager.CreateOrUpdatePreMatricula(model));
         }
-
-
         #endregion
+
         #region Store - Procedure
-        [HttpGet("{idPlan}/{idSemestre}")]
-        public async Task<IActionResult> GetCabeceraMatricula(int idPlan, int idSemestre) => Ok(await storeProcedureManager.GetCabeceraMatricula(idPlan, idSemestre));
+
+        [HttpGet("{idPlan}/{idSemestre}/{idPeriodoLectivoByInstitucion}")]
+        public async Task<IActionResult> GetCabeceraMatricula(int idPlan, int idSemestre, int idPeriodoLectivoByInstitucion)
+        {
+            var query = await storeProcedureManager.GetCabeceraMatricula(idPlan, idSemestre, idPeriodoLectivoByInstitucion);
+            if (query.ProgramacionMatricula.ID_PROGRAMACION_MATRICULA == 0)
+            {
+                return NotFound("No se encontró una matricula programda para el periodo actual");
+            }
+
+            return Ok(query);
+        }
 
 
         [HttpGet("GetListMatriculaCurso")]
-        public async Task<IActionResult> MatriculaForEdi(int ID_INSTITUCION, int ID_PERIODO_ACADEMICO, int ID_PLAN_ESTUDIO, int ID_SEMESTRE_ACADEMICO_ACTUAL, int ID_ESTUDIANTE_INSTITUCION, int ID_MATRICULA_ESTUDIANTE, bool ES_UNIDAD_DIDACTICA_EF, int Pagina, int Registros, bool ES_MATRICULA_CON_UD_PREVIAS)
+        public async Task<IActionResult> MatriculaForEdi([FromQuery] GetMatriculaRequestDto model)
         {
-            return Ok(await storeProcedureManager.GetCursosMatricula(ID_INSTITUCION, ID_PERIODO_ACADEMICO, ID_PLAN_ESTUDIO, ID_SEMESTRE_ACADEMICO_ACTUAL, ID_ESTUDIANTE_INSTITUCION, ID_MATRICULA_ESTUDIANTE, ES_UNIDAD_DIDACTICA_EF, Pagina, Registros, ES_MATRICULA_CON_UD_PREVIAS));
-        }
+            var responseData = new GetPreMatriculaCabeceraListCursoDto();
+            var cabacera = await storeProcedureManager.GetCabeceraMatricula(model.ID_PLAN_ESTUDIO, model.ID_SEMESTRE_ACADEMICO_ACTUAL, model.ID_PERIODOS_LECTIVOS_POR_INSTITUCION);
 
+            if (cabacera?.ProgramacionMatricula?.ID_PROGRAMACION_MATRICULA == null)
+            {
+                return NotFound("No se encontró una matricula programada para el periodo actual");
+            }
+
+            if (await _preMatriculaManager.GetValidateMatriculaExistente(model.ID_ESTUDIANTE_INSTITUCION, model.ID_PERIODOS_LECTIVOS_POR_INSTITUCION))
+            {
+                return NotFound("Ya existe una matrícula registrada para este periodo lectivo");
+            }
+
+
+            var cursos = await storeProcedureManager.GetCursosMatricula(
+                model.ID_INSTITUCION,
+                model.ID_PERIODO_ACADEMICO,
+                model.ID_PLAN_ESTUDIO,
+                model.ID_SEMESTRE_ACADEMICO_ACTUAL,
+                model.ID_ESTUDIANTE_INSTITUCION,
+                model.ID_MATRICULA_ESTUDIANTE,
+                model.ES_UNIDAD_DIDACTICA_EF,
+                model.Pagina,
+                model.Registros,
+                model.ES_MATRICULA_CON_UD_PREVIAS);
+
+            responseData.cabecera = cabacera;
+            responseData.listaCursos = cursos;
+
+            return Ok(responseData);
+        }
 
         [HttpGet("GetListProgramacionCurso/{idInstitucion}/{idPeriodoAcademico}/{idUnidadDidactica}")]
         public async Task<IActionResult> ListaProgramacionCurso(int idInstitucion, int idPeriodoAcademico, int idUnidadDidactica)
         {
             return Ok(await storeProcedureManager.GetProgramacionCurso(idInstitucion, idPeriodoAcademico, idUnidadDidactica));
         }
+
+        [HttpGet("{idEstudiante:int}")]
+        public async Task<IActionResult> GetMatriculasRegistradas(int idEstudiante) =>
+           Ok(await _preMatriculaManager.GetFichasEstudianteByIdPersona(idEstudiante));
+
+
         #endregion
-
-
-
     }
 }

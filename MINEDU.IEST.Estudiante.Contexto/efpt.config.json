@@ -1,49 +1,26 @@
 ﻿{
    "CodeGenerationMode": 2,
    "ContextClassName": "SecurityApiDbContext",
-   "ContextNamespace": "Contexto.Data.SecurityApi",
+   "ContextNamespace": "Contexto.Data.StoreProcedure",
    "DefaultDacpacSchema": null,
    "FilterSchemas": false,
    "IncludeConnectionString": false,
-   "ModelNamespace": "Entity.SecurityApi",
-   "OutputContextPath": "Data\\SecurityApi",
-   "OutputPath": "Data\\SecurityApi\\Entity",
+   "ModelNamespace": "Entity.StoreProcedure",
+   "OutputContextPath": "Data\\StoreProcedure2",
+   "OutputPath": "Data\\StoreProcedure2\\Entity",
+   "PreserveCasingWithRegex": true,
    "ProjectRootNamespace": "MINEDU.IEST.Estudiante",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "[maestro].[persona]",
-         "ObjectType": 0
+         "Name": "[dbo].[USP_EVALUACION_SEL_LISTA_HISTORIAL_ACADEMICO_ESTUDIANTE]",
+         "ObjectType": 1
       },
       {
-         "Name": "[Security].[RoleClaims]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[Security].[Roles]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[Security].[UserClaims]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[Security].[UserLogins]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[Security].[UserRoles]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[Security].[Users]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[Security].[UserTokens]",
-         "ObjectType": 0
+         "Name": "[dbo].[USP_MATRICULA_RPT_BOLETA_NOTAS]",
+         "ObjectType": 1
       }
    ],
    "UiHint": "aasrvbd005.db_regia_5.dbo",
@@ -63,5 +40,6 @@
    "UseNodaTime": false,
    "UseNullableReferences": false,
    "UseSchemaFolders": false,
-   "UseSpatial": false
+   "UseSpatial": false,
+   "UseT4": false
 }

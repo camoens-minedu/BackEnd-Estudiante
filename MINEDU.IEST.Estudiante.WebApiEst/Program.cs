@@ -8,6 +8,7 @@ using MINEDU.IEST.Estudiante.Inf_Apis.Extension;
 using MINEDU.IEST.Estudiante.Inf_Utils.Dtos;
 using MINEDU.IEST.Estudiante.Inf_Utils.Filters;
 using MINEDU.IEST.Estudiante.Inf_Utils.Helpers.EmailSender;
+using MINEDU.IEST.Estudiante.Inf_Utils.Helpers.FileManager;
 using MINEDU.IEST.Estudiante.Manager.MappingDto;
 using MINEDU.IEST.Estudiante.WebApiEst.Helpers;
 using Newtonsoft.Json.Serialization;
@@ -20,7 +21,7 @@ var configuration = builder.Configuration;
 var CurrentEnvironment = builder.Environment;
 
 //Configuracion de correo-------------------------------------/
-var emailConfig = configuration.GetSection("MailSettings").Get<MailSettings>();
+var emailConfig = configuration.GetSection("MailSettings").Get<MailSettings>(opt => opt.BindNonPublicProperties = true);
 builder.Services.AddSingleton(emailConfig);
 builder.Services.Configure<FormOptions>(o =>
 {
@@ -31,7 +32,13 @@ builder.Services.Configure<FormOptions>(o =>
 
 /*------------------------------------------------------------*/
 
+//Configuracion ruta de los recursos-------------------------------------/
+var recursos = configuration.GetSection("ResourceDto").Get<ResourceDto>(opt => opt.BindNonPublicProperties = true);
+builder.Services.AddSingleton(recursos);
 
+/*------------------------------------------------------------*/
+
+//Configuracion para el BackEnd-------------------------------------/
 BackEndConfig backEndConfig = configuration.GetSection("BackEndConfig").Get<BackEndConfig>();
 
 //Seri Log - Config
@@ -66,6 +73,7 @@ builder.Services.AddAuditoria(opt => opt.ConnectionString = backEndConfig.BdSqlS
 builder.Services.AddAuxiliar(opt => opt.ConnectionString = backEndConfig.BdSqlServerAuxiliar);
 builder.Services.AddManager();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddStorageManager(opt => opt.Type = StorageType.FileStorage);
 
 
 //Servicio de acceso al contexto

@@ -8,6 +8,7 @@ namespace MINEDU.IEST.Estudiante.Repository.SecurityApi
     {
         IPasswordHasher PasswordHasher { get; set; }
 
+        Task<bool> claveCompare(string clave, int idPersona);
         Task<Persona> GetPersonaCorreo(int idPersona);
         Task<User> GetUserByIdPersona(int idPersona);
         Task<User> GetUserByUserName(int idPersona);

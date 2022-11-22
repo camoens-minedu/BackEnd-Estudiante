@@ -11,5 +11,7 @@ namespace MINEDU.IEST.Estudiante.Manager.SecurityApi
         Task<List<GetEnumeradoComboDto>> GetTipoDocumento();
         Task<GetUserDto> GetUserByUserName(int idPersona);
         Task<List<GetPersonaInstitucionApiDto>> GetInstitucionesAsync(int id_Persona);
+        Task<GetValidatePersonaDto> GetForgotPassword(string email, string codigo);
+        Task<bool> GetChangePassword(int idPersona, string oldClave, string newClave);
     }
 }

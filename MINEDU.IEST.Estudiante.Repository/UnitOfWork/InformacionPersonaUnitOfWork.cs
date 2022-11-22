@@ -23,9 +23,9 @@ namespace MINEDU.IEST.Estudiante.Repository.UnitOfWork
             _context.SaveChanges();
         }
 
-        public void SaveAsync()
+        public async Task SaveAsync()
         {
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
         protected virtual void Dispose(bool disposing)
         {

@@ -38,10 +38,10 @@ namespace MINEDU.IEST.Estudiante.Entity
         public  persona_institucion ID_PERSONA_INSTITUCIONNavigation { get; set; } = null!;
         public  plan_estudio? ID_PLAN_ESTUDIONavigation { get; set; }
         public  turnos_por_institucion ID_TURNOS_POR_INSTITUCIONNavigation { get; set; } = null!;
-        public  ICollection<evaluacion_extraordinaria> evaluacion_extraordinaria { get; set; }
-        public  ICollection<liberacion_estudiante> liberacion_estudiante { get; set; }
-        public  ICollection<matricula_estudiante> matricula_estudiante { get; set; }
-        public  ICollection<reserva_matricula> reserva_matricula { get; set; }
-        public  ICollection<retiro_estudiante> retiro_estudiante { get; set; }
+        public  List<evaluacion_extraordinaria> evaluacion_extraordinaria { get; set; }
+        public  List<liberacion_estudiante> liberacion_estudiante { get; set; }
+        public  List<matricula_estudiante> matricula_estudiante { get; set; }
+        public  List<reserva_matricula> reserva_matricula { get; set; }
+        public  List<retiro_estudiante> retiro_estudiante { get; set; }
     }
 }

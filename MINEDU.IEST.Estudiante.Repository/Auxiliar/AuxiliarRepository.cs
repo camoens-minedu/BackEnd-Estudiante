@@ -18,9 +18,56 @@ namespace MINEDU.IEST.Estudiante.Repository.Auxiliar
 
 
         public async Task<UbigeoAuxiliar> GetUbigeoAuxiliarById(string id) => await _context.TblUbigeos.FirstOrDefaultAsync(p => p.CodigoUbigeo == id);
+        public async Task<UvwUbigeoReniec> GetUbigeoReniecById(string id) => await _context.UbigeoReniec.FirstOrDefaultAsync(p => p.CODIGO_UBIGEO == id);
 
-        public async Task<UvwInstitucion> GetInstitucion(int idInstitucion) 
-            => await _context.UvwInstitucions.FirstOrDefaultAsync(p => p.IdInstitucion==idInstitucion);
+        public async Task<UvwInstitucion> GetInstitucion(int idInstitucion)
+            => await _context.UvwInstitucions.FirstOrDefaultAsync(p => p.IdInstitucion == idInstitucion);
+
+
+        public async Task<List<UvwUbigeoReniec>> GetUbigeoReniecByFitro(string filtro)
+        {
+
+
+            //var query = (await _context.UbigeoReniec.Select(p => p.DISTRITO_UBIGEO.Contains(filtro)).ToListAsync());
+
+            //var query = await _context.UbigeoReniec
+            //.Contains()
+            //.Where(p =>
+            //filtro.ToUpper().Contains(p.DEPARTAMENTO_UBIGEO.ToUpper()) ||
+            //filtro.ToUpper().Contains(p.PROVINCIA_UBIGEO.ToUpper()) ||
+            //filtro.Contains(p.DISTRITO_UBIGEO))
+            //filtro.StartsWith(p.DISTRITO_UBIGEO))
+            //.Skip(20)
+            //.ToListAsync();
+
+            var distrito = await (from s in _context.UbigeoReniec
+                                  where filtro.Contains(s.DISTRITO_UBIGEO)
+                                  select s)
+                               .Take(10)
+                               .ToListAsync();
+
+            var provincia = await (from s in _context.UbigeoReniec
+                                   where filtro.Contains(s.PROVINCIA_UBIGEO)
+                                   select s)
+                              .Take(10)
+                              .ToListAsync();
+
+            var departamento = await (from s in _context.UbigeoReniec
+                                      where filtro.Contains(s.DEPARTAMENTO_UBIGEO)
+                                      select s)
+                            .Take(10)
+                            .ToListAsync();
+
+            var result = distrito.Union(provincia).Union(departamento).ToList();
+            //var query = await _context.UbigeoReniec
+            //.Where(p => filtro.ToUpper().Contains((p.DEPARTAMENTO_UBIGEO.ToUpper() + " / " + p.PROVINCIA_UBIGEO.ToUpper() + " / " + p.DISTRITO_UBIGEO.ToUpper())))
+            //.Skip(20)
+            //.ToListAsync();
+
+
+            return result;
+        }
+
 
     }
 }

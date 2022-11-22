@@ -6,5 +6,6 @@ namespace MINEDU.IEST.Estudiante.Inf_Utils.Helpers.EmailSender
     {
         Task SendEmailAsync(MailRequest mailRequest);
         Task SendEmailAsync(Message message);
+        Task SendEmailRestauraClaveAsync(Message message);
     }
 }

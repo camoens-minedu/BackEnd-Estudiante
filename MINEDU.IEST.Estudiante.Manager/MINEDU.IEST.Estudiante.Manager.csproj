@@ -19,8 +19,4 @@
     <ProjectReference Include="..\MINEDU.IEST.Estudiante.Repository\MINEDU.IEST.Estudiante.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Resources\Documents\" />
-  </ItemGroup>
-
 </Project>

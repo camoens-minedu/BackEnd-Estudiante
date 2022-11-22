@@ -45,5 +45,20 @@ namespace MINEDU.IEST.Estudiante.Repository.Maestra
         }
 
 
+        public sede_institucion GetSedeInstitucionByIdCarreraInstitucionDetalle(int idCarInstitucionDetalle)
+        {
+            var query = from x in _context.carreras_por_institucion_detalle
+                        join si in _context.sede_institucion on x.ID_SEDE_INSTITUCION equals si.ID_SEDE_INSTITUCION
+                        where x.ID_CARRERAS_POR_INSTITUCION_DETALLE == idCarInstitucionDetalle
+                        select new sede_institucion
+                        {
+                            ID_SEDE_INSTITUCION = si.ID_SEDE_INSTITUCION,
+                            NOMBRE_SEDE = si.NOMBRE_SEDE,
+                            DIRECCION_SEDE = si.DIRECCION_SEDE
+                        };
+
+            return query.FirstOrDefault();
+        }
+
     }
 }

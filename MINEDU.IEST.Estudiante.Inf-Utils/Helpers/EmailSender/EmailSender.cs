@@ -7,17 +7,73 @@ namespace MINEDU.IEST.Estudiante.Inf_Utils.Helpers.EmailSender
     public class EmailSender : IEmailSender
     {
         private readonly MailSettings _mailSettings;
+        private readonly ResourceDto _resourceDto;
+
         //private readonly IWebHostEnvironment hostingEnvironment;
 
-        public EmailSender(MailSettings mailSettings)
+        public EmailSender(MailSettings mailSettings, ResourceDto resourceDto)
         {
             this._mailSettings = mailSettings;
+            this._resourceDto = resourceDto;
         }
 
         public async Task SendEmailAsync(Message message)
         {
             var mailMessage = CreateEmailMessage(message);
             await SendAsync(mailMessage);
+        }
+
+        public async Task SendEmailRestauraClaveAsync(Message message)
+        {
+            var mailMessage = CreateEmailMessageRestauraClave(message);
+            await SendAsync(mailMessage);
+        }
+
+        private MimeMessage CreateEmailMessageRestauraClave(Message message)
+        {
+            try
+            {
+                var emailMessage = new MimeMessage();
+                emailMessage.From.Add(new MailboxAddress("DIRECCION IEST - MINEDU", _mailSettings.UsuarioCorreo));
+                emailMessage.To.AddRange(message.To);
+                emailMessage.Subject = message.Subject;
+                var fileHtmlPath = $"{_resourceDto.template_correo}/restaura_clave.html";
+                string bodyHtml = string.Empty;
+
+                using (StreamReader SourceReader = System.IO.File.OpenText(fileHtmlPath))
+                {
+                    bodyHtml = SourceReader.ReadToEnd();
+
+                }
+                var bodyBuilder = new BodyBuilder { HtmlBody = getHtmlBody(bodyHtml, message.Content.ToArray()) };
+
+                if (message.Attachments != null && message.Attachments.Any())
+                {
+                    byte[] fileBytes;
+                    foreach (var attachment in message.Attachments)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            attachment.CopyTo(ms);
+                            fileBytes = ms.ToArray();
+                        }
+
+                        bodyBuilder.Attachments.Add(attachment.FileName, fileBytes, ContentType.Parse(attachment.ContentType));
+                    }
+                }
+                //emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+                //{
+                //    Text = bodyBuilder.ToMessageBody().ToString()
+                //};
+                emailMessage.Body = bodyBuilder.ToMessageBody();
+
+                return emailMessage;
+            }
+            catch (Exception ex)
+            {
+                //logger.LogError(ex.Message);
+                throw ex;
+            }
         }
 
         private MimeMessage CreateEmailMessage(Message message)
@@ -28,7 +84,7 @@ namespace MINEDU.IEST.Estudiante.Inf_Utils.Helpers.EmailSender
                 emailMessage.From.Add(new MailboxAddress("DIRECCION IEST - MINEDU", _mailSettings.UsuarioCorreo));
                 emailMessage.To.AddRange(message.To);
                 emailMessage.Subject = message.Subject;
-                var fileHtmlPath = "Resources/template-correo/account_validate.html";
+                var fileHtmlPath = $"{_resourceDto.template_correo}/account_validate.html";
                 string bodyHtml = string.Empty;
 
                 using (StreamReader SourceReader = System.IO.File.OpenText(fileHtmlPath))

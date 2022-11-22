@@ -23,7 +23,7 @@ namespace MINEDU.IEST.Estudiante.Entity
         public  enfoques_por_plan_estudio ID_ENFOQUES_POR_PLAN_ESTUDIONavigation { get; set; } = null!;
         public  tipo_unidad_didactica? ID_TIPO_UNIDAD_DIDACTICANavigation { get; set; }
         public  unidad_didactica ID_UNIDAD_DIDACTICANavigation { get; set; } = null!;
-        public  ICollection<evaluacion_experiencia_formativa> evaluacion_experiencia_formativa { get; set; }
-        public  ICollection<unidades_didacticas_por_programacion_clase> unidades_didacticas_por_programacion_clase { get; set; }
+        public  List<evaluacion_experiencia_formativa> evaluacion_experiencia_formativa { get; set; }
+        public  List<unidades_didacticas_por_programacion_clase> unidades_didacticas_por_programacion_clase { get; set; }
     }
 }

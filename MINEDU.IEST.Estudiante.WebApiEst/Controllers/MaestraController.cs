@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MINEDU.IEST.Estudiante.Manager.Auxiliar;
 using MINEDU.IEST.Estudiante.Manager.Maestra;
 using MINEDU.IEST.Estudiante.ManagerDto.Maestra;
 
@@ -10,11 +11,13 @@ namespace MINEDU.IEST.Estudiante.WebApiEst.Controllers
     {
         private readonly IMaestraManager maestraManager;
         private readonly ILogger<MaestraController> logger;
+        private readonly IAuxiliarManager _auxiliarManager;
 
-        public MaestraController(IMaestraManager maestraManager, ILogger<MaestraController> logger)
+        public MaestraController(IMaestraManager maestraManager, ILogger<MaestraController> logger, IAuxiliarManager auxiliarManager)
         {
             this.maestraManager = maestraManager;
             this.logger = logger;
+            this._auxiliarManager = auxiliarManager;
         }
 
 
@@ -33,7 +36,23 @@ namespace MINEDU.IEST.Estudiante.WebApiEst.Controllers
                 logger.LogError(ex.Message, ex);
                 throw;
             }
-        } 
+        }
+
+
+        [HttpGet("getubigeofiltro/{filtro}")]
+        public async Task<IActionResult> getUbigeoFiltro(string filtro)
+        {
+            try
+            {
+                return Ok(await _auxiliarManager.GetUbigeoReniecByFitro(filtro));
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message, ex);
+                throw;
+            }
+        }
+
         #endregion
 
 

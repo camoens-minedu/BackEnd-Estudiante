@@ -3,6 +3,7 @@ using MINEDU.IEST.Estudiante.Inf_Utils.Constants;
 using MINEDU.IEST.Estudiante.Inf_Utils.Filters;
 using MINEDU.IEST.Estudiante.Inf_Utils.Helpers;
 using MINEDU.IEST.Estudiante.Manager.InformacionPersonal;
+using MINEDU.IEST.Estudiante.ManagerDto.InformacionPersonal;
 
 namespace MINEDU.IEST.Estudiante.WebApiEst.Controllers
 {
@@ -67,7 +68,7 @@ namespace MINEDU.IEST.Estudiante.WebApiEst.Controllers
             try
             {
                 var query = await _personalManager.GetEstudiantePerfil(idInstitucion, idCarrera);
-                if (query==null)
+                if (query == null)
                 {
                     return NotFound("Estudiante no encontrado");
                 }
@@ -82,6 +83,10 @@ namespace MINEDU.IEST.Estudiante.WebApiEst.Controllers
         }
 
 
-
+        [HttpPost("CreateOrUpdateInformacionPersonal")]
+        public async Task<IActionResult> CreateOrUpdateInformacionPersonal(CreateOrUpdatePersonaDto model)
+        {
+            return Ok(await _personalManager.CreateOrUpdateInformacionPersonal(model));
+        }
     }
 }

@@ -7,5 +7,6 @@ namespace MINEDU.IEST.Estudiante.Manager.Auxiliar
         Task<List<GetPaisDto>> GetPaisAll();
         Task<GetPaisDto> GetPaisByCodigo(string codigo);
         Task<GetUbigeoAuxiliarDto> GetUbigeoAuxiliarById(string id);
+        Task<List<GetUbigeoAuxiliarDto>> GetUbigeoReniecByFitro(string filtro);
     }
 }

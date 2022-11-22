@@ -31,7 +31,12 @@ namespace MINEDU.IEST.Estudiante.Manager.Auxiliar
 
         public async Task<GetUbigeoAuxiliarDto> GetUbigeoAuxiliarById(string id)
         {
-            return _mapper.Map<GetUbigeoAuxiliarDto>(_auxiliarUnitOfWork._auxiliarRepository.GetUbigeoAuxiliarById(id));
+            return _mapper.Map<GetUbigeoAuxiliarDto>(await _auxiliarUnitOfWork._auxiliarRepository.GetUbigeoReniecById(id));
+        }
+
+        public async Task<List<GetUbigeoAuxiliarDto>> GetUbigeoReniecByFitro(string filtro)
+        {
+            return _mapper.Map<List<GetUbigeoAuxiliarDto>>(await _auxiliarUnitOfWork._auxiliarRepository.GetUbigeoReniecByFitro(filtro));
         }
 
 

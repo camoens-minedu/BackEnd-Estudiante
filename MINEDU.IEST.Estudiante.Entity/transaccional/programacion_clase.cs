@@ -29,9 +29,9 @@ namespace MINEDU.IEST.Estudiante.Entity
         public  periodo_academico ID_PERIODO_ACADEMICONavigation { get; set; } = null!;
         public  sede_institucion ID_SEDE_INSTITUCIONNavigation { get; set; } = null!;
         public  turnos_por_institucion ID_TURNOS_POR_INSTITUCIONNavigation { get; set; } = null!;
-        public  ICollection<evaluacion> evaluacion { get; set; }
-        public  ICollection<programacion_clase_por_matricula_estudiante> programacion_clase_por_matricula_estudiante { get; set; }
-        public  ICollection<sesion_programacion_clase> sesion_programacion_clase { get; set; }
-        public  ICollection<unidades_didacticas_por_programacion_clase> unidades_didacticas_por_programacion_clase { get; set; }
+        public  List<evaluacion> evaluacion { get; set; }
+        public  List<programacion_clase_por_matricula_estudiante> programacion_clase_por_matricula_estudiante { get; set; }
+        public  List<sesion_programacion_clase> sesion_programacion_clase { get; set; }
+        public  List<unidades_didacticas_por_programacion_clase> unidades_didacticas_por_programacion_clase { get; set; }
     }
 }

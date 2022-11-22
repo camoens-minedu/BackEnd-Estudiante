@@ -21,6 +21,11 @@
         public int ESTADO { get; set; }
         public int ID_PERIODOS_LECTIVOS_POR_INSTITUCION { get; set; }
         public int? ID_PLAN_ESTUDIO { get; set; }
+        public string xCodigoPeriodoLectivoIngreso { get; set; }
+        public string xTextoSituacion { get; set; }
+        public string xTextoModalidad { get; set; }
+        public string xPeriodoAcademicoActual { get; set; }
+        public string xNombreSede { get; set; }
 
         public GetInstitucionBasicaPerfilDto GetInstitucionBasicaPerfilDto { get; set; }
         public GetPeriodoLecticoPorInstitucionPerfilDto GetPeriodoLecticoPorInstitucionPerfilDto { get; set; }
