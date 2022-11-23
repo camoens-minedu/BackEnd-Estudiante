@@ -83,9 +83,9 @@ namespace MINEDU.IEST.Estudiante.WebApiEst.Controllers
             return Ok(await storeProcedureManager.GetProgramacionCurso(idInstitucion, idPeriodoAcademico, idUnidadDidactica));
         }
 
-        [HttpGet("{idEstudiante:int}")]
-        public async Task<IActionResult> GetMatriculasRegistradas(int idEstudiante) =>
-           Ok(await _preMatriculaManager.GetFichasEstudianteByIdPersona(idEstudiante));
+        [HttpGet("{idEstudiante:int}/{idPeriodoLectivo:int}")]
+        public async Task<IActionResult> GetMatriculasRegistradas(int idEstudiante, int idPeriodoLectivo) =>
+           Ok(await storeProcedureManager.GetMatriculaConsolidados(idEstudiante, idPeriodoLectivo));
 
 
         #endregion

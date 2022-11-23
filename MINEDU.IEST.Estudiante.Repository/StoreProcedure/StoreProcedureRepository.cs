@@ -94,7 +94,17 @@ namespace MINEDU.IEST.Estudiante.Repository.StoreProcedure
             return qResult;
         }
 
+        public async Task<List<USP_MATRICULA_SEL_CONSOLIDADO_MATRICULA_ESTUDIANTE>> GetMatriculaConsolidados(int ID_ESTUDIANTE_INSTITUCION, int ID_PERIODOS_LECTIVOS_POR_INSTITUCION)
+        {
+            var procedureName = "USP_MATRICULA_SEL_CONSOLIDADO_MATRICULA_ESTUDIANTE";
+            //var procedureName = "USP_EVALUACION_SEL_LISTA_HISTORIAL_ACADEMICO_ESTUDIANTE_test_ilozano";
+            var parameters = new DynamicParameters();
+            parameters.Add("@ID_ESTUDIANTE_INSTITUCION", ID_ESTUDIANTE_INSTITUCION, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ID_PERIODOS_LECTIVOS_POR_INSTITUCION", ID_PERIODOS_LECTIVOS_POR_INSTITUCION, DbType.Int32, ParameterDirection.Input);
 
+            var qResult = await _database.GetAll<USP_MATRICULA_SEL_CONSOLIDADO_MATRICULA_ESTUDIANTE>(procedureName, parameters, CommandType.StoredProcedure);
+            return qResult;
+        }
 
         #endregion
 

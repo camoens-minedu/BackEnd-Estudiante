@@ -10,13 +10,16 @@ using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MINEDU.IEST.Estudiante.Entity.Security;
 using System;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace IdentityServerHost.Quickstart.UI
@@ -32,6 +35,7 @@ namespace IdentityServerHost.Quickstart.UI
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
         private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment env;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -39,7 +43,7 @@ namespace IdentityServerHost.Quickstart.UI
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
-            IEventService events, IConfiguration configuration)
+            IEventService events, IConfiguration configuration, IWebHostEnvironment env)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -48,6 +52,7 @@ namespace IdentityServerHost.Quickstart.UI
             _schemeProvider = schemeProvider;
             _events = events;
             this._configuration = configuration;
+            this.env = env;
         }
 
         /// <summary>
@@ -65,7 +70,7 @@ namespace IdentityServerHost.Quickstart.UI
                 return RedirectToAction("Challenge", "External", new { scheme = vm.ExternalLoginScheme, returnUrl });
             }
 
-            
+
             return View(vm);
         }
 
@@ -214,7 +219,7 @@ namespace IdentityServerHost.Quickstart.UI
 
         public ActionResult RedirectToApp()
         {
-            var urlApp= _configuration["urlAppEstudiante:validacion"].ToString();
+            var urlApp = _configuration["urlAppEstudiante:validacion"].ToString();
 
             return Redirect(urlApp);
         }
@@ -226,6 +231,26 @@ namespace IdentityServerHost.Quickstart.UI
             return Redirect(urlApp);
         }
 
+        #region Files
+
+        public ActionResult ManuaEstudiante()
+        {
+            var ruta = Path.Combine(env.WebRootPath, "MyFiles", "ManualUsuario.pdf");
+
+            //return new FilePathResult(Server.MapPath("/MyFiles/REGLAMENTO-GRAL-UCP.pdf"), "application/pdf");
+            if (System.IO.File.Exists(ruta))
+            {
+                byte[] fileBytes = System.IO.File.ReadAllBytes(ruta);
+
+                return File(fileBytes
+                               , MediaTypeNames.Application.Pdf, "ManualUsuario.pdf");
+            }
+
+            return NotFound();
+
+        }
+
+        #endregion
 
 
         /*****************************************/

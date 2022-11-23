@@ -217,19 +217,18 @@ namespace MINEDU.IEST.Estudiante.Manager.Reporte
 
                 doc.Add(title);
                 string mensaje = string.Empty;
-
                 switch (data.ESTADO)
                 {
-                    case 3: mensaje = "PRE-MATRICULA"; break;
+                    case 3: mensaje = "PENDIENTE DE APROBACIÓN"; break;
                     case 1: mensaje = "ACTIVO"; break;
-                    case 2: mensaje = "ANULADO"; break;
+                    case 2: mensaje = "RECHAZADO"; break;
                     default:
                         break;
                 }
                 Paragraph titleSituacion = new Paragraph();
                 titleSituacion.SetFont(fontTitle).SetFontSize(9f).SetFontColor(ColorConstants.BLACK)
-                    .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER).SetUnderline()
-                    .Add("SITUACION: " + mensaje);
+                    .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
+                    .Add("[ SITUACION: " + mensaje + " ]");
 
                 doc.Add(titleSituacion);
 

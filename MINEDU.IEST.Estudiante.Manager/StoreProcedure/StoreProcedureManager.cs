@@ -78,6 +78,13 @@ namespace MINEDU.IEST.Estudiante.Manager.StoreProcedure
             return _mapper.Map<List<GetHistorialAcademicoDto>>(qPeriodoAcademico);
         }
 
+
+        public async Task<List<GetMatriculaConsolitadoDto>> GetMatriculaConsolidados(int ID_ESTUDIANTE_INSTITUCION, int ID_PERIODOS_LECTIVOS_POR_INSTITUCION)
+        {
+            var query = await _storeProcedureUnitOfWork._spRepository.GetMatriculaConsolidados(ID_ESTUDIANTE_INSTITUCION, ID_PERIODOS_LECTIVOS_POR_INSTITUCION);
+            return _mapper.Map<List<GetMatriculaConsolitadoDto>>(query);
+
+        }
         #endregion
     }
 }

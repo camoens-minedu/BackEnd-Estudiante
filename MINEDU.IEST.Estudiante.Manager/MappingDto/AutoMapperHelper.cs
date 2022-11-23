@@ -61,14 +61,14 @@ namespace MINEDU.IEST.Estudiante.Manager.MappingDto
                 .ForMember(dest => dest.DistritoUbigeo, opt => opt.MapFrom(c => c.DISTRITO_UBIGEO))
                 .ForMember(dest => dest.nombreFull, opt => opt.MapFrom(c => $"{c.DEPARTAMENTO_UBIGEO} / {c.PROVINCIA_UBIGEO} / {c.DISTRITO_UBIGEO}"));
 
-     
+
             #endregion
 
             #region Store Procedure
             CreateMap<USP_MATRICULA_SEL_DATOS_GENERALES_MATRICULAResult, GetCabeceraMatriculaSpDto>();
             CreateMap<USP_MATRICULA_SEL_UNIDADES_DIDACTICAS_PAGINADOResult, GetListMatriculaCurso>();
             CreateMap<ProgramacionCurso, GetListProgramacionCurso>();
-
+            CreateMap<USP_MATRICULA_SEL_CONSOLIDADO_MATRICULA_ESTUDIANTE, GetMatriculaConsolitadoDto>();
             #endregion
 
             #region Pre-MAtricula

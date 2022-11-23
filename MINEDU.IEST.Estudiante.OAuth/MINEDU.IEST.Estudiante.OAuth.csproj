@@ -4,8 +4,16 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
+ 
+
   <ItemGroup>
     <None Remove="Services\ProfileService.cs~RF97835e6.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\MyFiles\ManualUsuario.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
