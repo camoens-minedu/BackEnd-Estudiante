@@ -122,6 +122,22 @@ namespace MINEDU.IEST.Estudiante.Contexto.Data.Auxiliar.Configurations
                 .IsUnicode(false)
                 .HasColumnName("VALIDADO_ESCALE");
 
+            entity.Property(e => e.EmailSoporteEstudiante)
+                         .HasMaxLength(300)
+                         .IsUnicode(false)
+                         .HasColumnName("EMAIL_SOPORTE_ESTUDIANTE");
+
+            entity.Property(e => e.TelefonoSoporteEstudiante)
+             .HasMaxLength(300)
+             .IsUnicode(false)
+             .HasColumnName("TELEFONO_SOPORTE_ESTUDIANTE");
+
+            entity.Property(e => e.CelularSoporteEstudiante)
+                .HasMaxLength(300)
+                .IsUnicode(false)
+                .HasColumnName("CELULAR_SOPORTE_ESTUDIANTE");
+
+
             OnConfigurePartial(entity);
         }
 

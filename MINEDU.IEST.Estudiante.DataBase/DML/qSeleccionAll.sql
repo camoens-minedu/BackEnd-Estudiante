@@ -404,18 +404,27 @@ select * from transaccional.estudiante_institucion where ID_ESTUDIANTE_INSTITUCI
 select * from maestro.persona_institucion where ID_PERSONA_INSTITUCION = 118209
 select * from maestro.persona where ID_PERSONA = 117512
 
-select top 10 * from db_auxiliar..UVW_UBIGEO where CODIGO_UBIGEO = '010202'
+select top 10 * from db_auxiliar..UVW_UBIGEO_RENIEC where CODIGO_UBIGEO = '010202'
+select top 100 * from db_auxiliar..UVW_UBIGEO_RENIEC where (DEPARTAMENTO_UBIGEO + PROVINCIA_UBIGEO + DISTRITO_UBIGEO )  like '%RIMAC%'
 
-select * from transaccional.programacion_matricula where ID_PERIODOS_LECTIVOS_POR_INSTITUCION = 1519
+sp_helptext db_auxiliar..UVW_UBIGEO_RENIEC
+
+select * from transaccional.programacion_matricula where ID_PERIODOS_LECTIVOS_POR_INSTITUCION = 1329
 
 SELECT distinct TOP 10  p.ID_PERIODO_ACADEMICO, plpi.ID_PERIODOS_LECTIVOS_POR_INSTITUCION ,pl.CODIGO_PERIODO_LECTIVO , p.ESTADO
 FROM transaccional.programacion_clase p
 INNER JOIN transaccional.periodo_academico pa ON p.ID_PERIODO_ACADEMICO=pa.ID_PERIODO_ACADEMICO
 INNER JOIN transaccional.periodos_lectivos_por_institucion plpi ON pa.ID_PERIODOS_LECTIVOS_POR_INSTITUCION=plpi.ID_PERIODOS_LECTIVOS_POR_INSTITUCION
 INNER join maestro.periodo_lectivo pl on plpi.ID_PERIODO_LECTIVO = pl.ID_PERIODO_LECTIVO
-WHERE plpi.ID_INSTITUCION=964
+WHERE plpi.ID_INSTITUCION=827
 and p.ES_ACTIVO = 1 and p.ESTADO = 1
 go
+
+ SELECT [u].[CODIGO_UBIGEO], [u].[DEPARTAMENTO_UBIGEO], [u].[DISTRITO_UBIGEO], [u].[PROVINCIA_UBIGEO]
+      FROM [UVW_UBIGEO_RENIEC] AS [u]
+      WHERE (((@__filtro_0 LIKE N'') OR (CHARINDEX(@__filtro_0, [u].[DEPARTAMENTO_UBIGEO]) > 0)) OR ((@__filtro_0 LIKE N'') OR (CHARINDEX(@__filtro_0, [u].[PROVINCIA_UBIGEO]) > 0))) OR ((@__filtro_0 LIKE N'') OR (CHARINDEX(@__filtro_0, [u].[DISTRITO_UBIGEO]) > 0))
+      ORDER BY (SELECT 1)
+      OFFSET @__p_1 ROWS
 
 update maestro.persona_institucion
 set UBIGEO_PERSONA = '010202'
@@ -508,7 +517,7 @@ FROM [transaccional].[programacion_clase] AS [p]
   INNER JOIN [transaccional].[periodo_academico] AS [p0] ON [p].[ID_PERIODO_ACADEMICO] = [p0].[ID_PERIODO_ACADEMICO]      
   INNER JOIN [transaccional].[periodos_lectivos_por_institucion] AS [p1] ON [p0].[ID_PERIODOS_LECTIVOS_POR_INSTITUCION] = [p1].[ID_PERIODOS_LECTIVOS_POR_INSTITUCION]
   INNER JOIN [maestro].[periodo_lectivo] AS [p2] ON [p1].[ID_PERIODO_LECTIVO] = [p2].[ID_PERIODO_LECTIVO]
-WHERE (([p1].[ID_INSTITUCION] =1911) AND ([p].[ESTADO] = 1)) AND ([p].[ES_ACTIVO] = CAST(1 AS bit))
+WHERE (([p1].[ID_INSTITUCION] =827) AND ([p].[ESTADO] = 1)) AND ([p].[ES_ACTIVO] = CAST(1 AS bit))
 go
 
 select * from transaccional.programacion_clase where ID_PERIODO_ACADEMICO = 3882
@@ -518,7 +527,7 @@ go
 SELECT * from [Security].Users
 go
 
-select top 20 pi.ID_PERSONA_INSTITUCION, ei.ID_ESTUDIANTE_INSTITUCION ,p.NUMERO_DOCUMENTO_PERSONA, p.APELLIDO_PATERNO_PERSONA, p.APELLIDO_MATERNO_PERSONA, p.NOMBRE_PERSONA, pi.CORREO
+select top 100 pi.ID_PERSONA_INSTITUCION, ei.ID_ESTUDIANTE_INSTITUCION ,p.NUMERO_DOCUMENTO_PERSONA, p.APELLIDO_PATERNO_PERSONA, p.APELLIDO_MATERNO_PERSONA, p.NOMBRE_PERSONA, pi.CORREO
 from transaccional.matricula_estudiante me
 inner join transaccional.estudiante_institucion ei on me.ID_ESTUDIANTE_INSTITUCION = ei.ID_ESTUDIANTE_INSTITUCION
 inner join 	maestro.persona_institucion pi on pi.ID_PERSONA_INSTITUCION = ei.ID_PERSONA_INSTITUCION
@@ -528,17 +537,21 @@ where ei.ESTADO = 1 and ei.ES_ACTIVO = 1
 ORDER by me.ID_MATRICULA_ESTUDIANTE DESC
 
 ------------------
+ID_PERSONA_INSTITUCION	ID_ESTUDIANTE_INSTITUCION	NUMERO_DOCUMENTO_PERSONA	APELLIDO_PATERNO_PERSONA	APELLIDO_MATERNO_PERSONA	NOMBRE_PERSONA	CORREO
+129264	114867	44977275	LOPEZ	TINEO	YUDITH	lopeztineoyudith@gmail.com
 
 
-select * from transaccional.matricula_estudiante where ID_ESTUDIANTE_INSTITUCION = 108483
--- select * from transaccional.estudiante_institucion where ID_ESTUDIANTE_INSTITUCION = 108483
-select * from transaccional.estudiante_institucion where ID_PERSONA_INSTITUCION = 123232
 
-select * from maestro.persona_institucion where ID_PERSONA_INSTITUCION = 123232
-select * from maestro.persona where ID_PERSONA = 122466
+
+select * from transaccional.matricula_estudiante where ID_ESTUDIANTE_INSTITUCION = 114862
+select * from transaccional.estudiante_institucion where ID_PERSONA_INSTITUCION = 129259
+
+select * from maestro.persona_institucion where ID_PERSONA_INSTITUCION = 129259
+select * from maestro.persona where ID_PERSONA = 128429
 
 go
 
+select top 10 * from sistema.enumerado 
 
 USP_EVALUACION_SEL_LISTA_HISTORIAL_ACADEMICO_ESTUDIANTE 221,26,'73046240',27,1255,442,403 	
 USP_EVALUACION_SEL_LISTA_HISTORIAL_ACADEMICO_ESTUDIANTE 221,26,'73046240',27,1255,442,3842 	
@@ -550,16 +563,16 @@ USP_EVALUACION_SEL_LISTA_HISTORIAL_ACADEMICO_ESTUDIANTE_test_ilozano 221,26,'755
 
 SELECT top 10  VALOR_ENUMERADO FROM sistema.enumerado
 
+GO
+
+SELECT * FROM maestro.persona where NUMERO_DOCUMENTO_PERSONA = '48607394'
+
+select * from maestro.persona_institucion where ID_PERSONA = 128431
+
+select * from [Security].Users where Id_Persona = 128431
 
 
-
-SELECT distinct top 1 [p].[ID_PERIODO_ACADEMICO], [p0].[ID_PERIODO_ACADEMICO], [p].[ESTADO], [p0].[ID_PERIODOS_LECTIVOS_POR_INSTITUCION], [p1].[ID_PERIODO_LECTIVO], [p2].[CODIGO_PERIODO_LECTIVO]
-FROM [transaccional].[programacion_clase] AS [p]
-  INNER JOIN [transaccional].[periodo_academico] AS [p0] ON [p].[ID_PERIODO_ACADEMICO] = [p0].[ID_PERIODO_ACADEMICO]      
-  INNER JOIN [transaccional].[periodos_lectivos_por_institucion] AS [p1] ON [p0].[ID_PERIODOS_LECTIVOS_POR_INSTITUCION] = [p1].[ID_PERIODOS_LECTIVOS_POR_INSTITUCION]
-  INNER JOIN [maestro].[periodo_lectivo] AS [p2] ON [p1].[ID_PERIODO_LECTIVO] = [p2].[ID_PERIODO_LECTIVO]
-WHERE (([p1].[ID_INSTITUCION] =827) AND ([p].[ESTADO] = 1)) AND ([p].[ES_ACTIVO] = CAST(1 AS bit))
+USP_MATRICULA_SEL_CONSOLIDADO_MATRICULA_ESTUDIANTE 114862,1329
 go
 
-SELECT * FROM transaccional.matricula_estudiante TM WHERE --TM.ID_PROGRAMACION_MATRICULA = 4226 AND 
-TM.ID_ESTUDIANTE_INSTITUCION = 114864
+sp_helptext USP_MATRICULA_SEL_CONSOLIDADO_MATRICULA_ESTUDIANTE

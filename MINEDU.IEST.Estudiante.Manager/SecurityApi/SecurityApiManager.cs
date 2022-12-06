@@ -87,7 +87,7 @@ namespace MINEDU.IEST.Estudiante.Manager.SecurityApi
                 item.ID_PERIODOS_LECTIVOS_POR_INSTITUCION_main = periodoAcademicosSesion.ID_PERIODO_ACADEMICONavigation.ID_PERIODOS_LECTIVOS_POR_INSTITUCIONNavigation.ID_PERIODOS_LECTIVOS_POR_INSTITUCION;
                 item.CODIGO_PERIODO_LECTIVO = periodoAcademicosSesion?.ID_PERIODO_ACADEMICONavigation?.ID_PERIODOS_LECTIVOS_POR_INSTITUCIONNavigation?.ID_PERIODO_LECTIVONavigation?.CODIGO_PERIODO_LECTIVO;
 
-                item.institucion =_mapper.Map<GetAuxInstitucionDto>(await _auxiliarUnitOfWork._auxiliarRepository.GetInstitucion(item.ID_INSTITUCION));
+                item.institucion = _mapper.Map<GetAuxInstitucionDto>(await _auxiliarUnitOfWork._auxiliarRepository.GetInstitucion(item.ID_INSTITUCION));
 
                 item.tieneCarreras = item.carreras.Count > 1;
 

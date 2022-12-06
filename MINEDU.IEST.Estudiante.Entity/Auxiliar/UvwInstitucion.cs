@@ -34,5 +34,12 @@ namespace MINEDU.IEST.Estudiante.Entity.Auxiliar
         public string Celular { get; set; }
         public bool? RealizaAdmision { get; set; }
         public bool? PermiteAdmision { get; set; }
+        public string EmailSoporteEstudiante { get; set; }
+        public string TelefonoSoporteEstudiante { get; set; }
+        public string CelularSoporteEstudiante { get; set; }
+
+      
+
+
     }
 }

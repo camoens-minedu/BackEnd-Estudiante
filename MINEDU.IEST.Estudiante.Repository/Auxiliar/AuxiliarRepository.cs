@@ -21,7 +21,20 @@ namespace MINEDU.IEST.Estudiante.Repository.Auxiliar
         public async Task<UvwUbigeoReniec> GetUbigeoReniecById(string id) => await _context.UbigeoReniec.FirstOrDefaultAsync(p => p.CODIGO_UBIGEO == id);
 
         public async Task<UvwInstitucion> GetInstitucion(int idInstitucion)
-            => await _context.UvwInstitucions.FirstOrDefaultAsync(p => p.IdInstitucion == idInstitucion);
+        {
+
+            try
+            {
+                var query = await _context.UvwInstitucions.FirstOrDefaultAsync(p => p.IdInstitucion == idInstitucion);
+                return query;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
 
 
         public async Task<List<UvwUbigeoReniec>> GetUbigeoReniecByFitro(string filtro)

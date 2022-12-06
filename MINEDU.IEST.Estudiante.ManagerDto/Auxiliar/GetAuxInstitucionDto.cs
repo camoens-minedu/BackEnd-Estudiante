@@ -29,5 +29,8 @@
         public string Email { get; set; }
         public string Telefono { get; set; }
         public string Celular { get; set; }
+        public string EmailSoporteEstudiante { get; set; }
+        public string TelefonoSoporteEstudiante { get; set; }
+        public string CelularSoporteEstudiante { get; set; }
     }
 }
