@@ -1,0 +1,150 @@
+.
+|-- MINEDU.IEST.Estudiante.Contexto
+|   |-- Data
+|   |   |-- Audit
+|   |   |-- Auxiliar
+|   |   |-- DigePadron
+|   |   |-- Estudiante
+|   |   |-- Security
+|   |   |-- SecurityApi
+|   |   `-- StoreProcedure
+|   `-- Migrations
+|-- MINEDU.IEST.Estudiante.DataBase
+|   |-- Audit
+|   |   `-- Tables
+|   |-- DDL
+|   |   |-- Audit
+|   |   `-- Security
+|   |-- DML
+|   |-- Import Schema Logs
+|   |-- MINEDU_JCHAVEZV
+|   |   `-- Stored Procedures
+|   |-- Security
+|   |   `-- Tables
+|   |-- archivo
+|   |   `-- Tables
+|   |-- dbo
+|   |   |-- Functions
+|   |   |-- Stored Procedures
+|   |   |-- Tables
+|   |   |-- User Defined Types
+|   |   `-- Views
+|   |-- maestro
+|   |   `-- Tables
+|   |-- sistema
+|   |   `-- Tables
+|   `-- transaccional
+|       `-- Tables
+|-- MINEDU.IEST.Estudiante.Entity
+|   |-- Audit
+|   |-- Auxiliar
+|   |-- DigePadron
+|   |-- Security
+|   |-- SecurityApi
+|   |-- StoreProcedure
+|   |-- archivo
+|   |-- maestro
+|   |-- sistema
+|   `-- transaccional
+|-- MINEDU.IEST.Estudiante.Inf-Apis
+|   `-- Extension
+|-- MINEDU.IEST.Estudiante.Inf-Utils
+|   |-- Constants
+|   |-- CustomMiddleware
+|   |-- Dtos
+|   |-- Enumerados
+|   |-- Filters
+|   |-- Helpers
+|   |   |-- Dapper
+|   |   |-- EmailSender
+|   |   `-- FileManager
+|   `-- Resource
+|       `-- FormatoCorreo
+|-- MINEDU.IEST.Estudiante.Manager
+|   |-- Auxiliar
+|   |-- InformacionPersonal
+|   |-- Maestra
+|   |-- MappingDto
+|   |-- PreMatricula
+|   |-- Reporte
+|   |-- SecurityApi
+|   |-- Seguridad
+|   `-- StoreProcedure
+|-- MINEDU.IEST.Estudiante.ManagerDto
+|   |-- Auxiliar
+|   |   `-- Pais
+|   |-- InformacionPersonal
+|   |-- Maestra
+|   |-- PerfilEstudiante
+|   |-- PreMatricula
+|   |-- Reporte
+|   |   `-- FichaMatricula
+|   |-- SecurityApi
+|   |   `-- ValidateUser
+|   `-- StoreProcedure
+|       `-- Reportes
+|-- MINEDU.IEST.Estudiante.OAuth
+|   |-- Infraestructure
+|   |-- Properties
+|   |-- Services
+|   |-- UI
+|   |   |-- Account
+|   |   |-- Consent
+|   |   |-- Device
+|   |   |-- Diagnostics
+|   |   |-- Grants
+|   |   `-- Home
+|   |-- Views
+|   |   |-- Account
+|   |   |-- Consent
+|   |   |-- Device
+|   |   |-- Diagnostics
+|   |   |-- Grants
+|   |   |-- Home
+|   |   `-- Shared
+|   `-- wwwroot
+|       |-- MyFiles
+|       |-- css
+|       |-- js
+|       `-- lib
+|-- MINEDU.IEST.Estudiante.OAuth.Api
+|   |-- Controllers
+|   |-- Helpers
+|   |-- Properties
+|   |-- Resources
+|   |   |-- Documents
+|   |   |-- Images
+|   |   `-- template-correo
+|   `-- wwwroot
+|       `-- swagger-ui
+|-- MINEDU.IEST.Estudiante.Repository
+|   |-- Audit
+|   |   `-- Helper
+|   |-- Auxiliar
+|   |-- Base
+|   |-- DigePadron
+|   |-- InformacionPersonal
+|   |-- Maestra
+|   |-- PreMatricula
+|   |-- Reporte
+|   |-- SecurityApi
+|   |-- StoreProcedure
+|   `-- UnitOfWork
+|-- MINEDU.IEST.Estudiante.Test
+|-- MINEDU.IEST.Estudiante.WebApiEst
+|   |-- Content
+|   |   |-- Captcha
+|   |   `-- Resource
+|   |-- Controllers
+|   |-- Helpers
+|   |-- Properties
+|   |-- Resources
+|   |   |-- Documents
+|   |   |-- Images
+|   |   `-- template-correo
+|   `-- wwwroot
+|       `-- swagger-ui
+`-- MINEDU.IEST.Estudiante.auxiliar
+    `-- Import Schema Logs
+
+147 directories

@@ -35,7 +35,7 @@ namespace IdentityServerHost.Quickstart.UI
             return View();
             //}
 
-            //_logger.LogInformation("Homepage is disabled in production. Returning 404.");
+            _logger.LogInformation("Homepage is disabled in production. Returning 404.");
             //return NotFound();
         }
 
@@ -48,6 +48,7 @@ namespace IdentityServerHost.Quickstart.UI
 
             // retrieve error details from identityserver
             var message = await _interaction.GetErrorContextAsync(errorId);
+            _logger.LogInformation(message.ToString());
             if (message != null)
             {
                 vm.Error = message;

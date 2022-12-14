@@ -11,7 +11,7 @@ select * from db_digepadron.dbo.carrera where ID_CARRERA = 1327
 select top 10 * from transaccional.plan_estudio where ID_PLAN_ESTUDIO = 5064
 
 select top 20 * From transaccional.plan_estudio_detalle where ID_PLAN_ESTUDIO = 2592
-SELECT * FROM db_auxiliar.dbo.UVW_INSTITUCION where ID_INSTITUCION = 1153
+SELECT * FROM db_auxiliar.dbo.UVW_INSTITUCION where ID_INSTITUCION = 3610
 SELECT * FROM db_digepadron.dbo.UVW_INSTITUCION where ID_INSTITUCION = 1153
 select * from transaccional.postulantes_por_modalidad where ID_PERSONA_INSTITUCION = 209725
 --select top 10 * from maestro.carrera_profesional where ID_CARRERA_PROFESIONAL = 2166
@@ -575,4 +575,32 @@ select * from [Security].Users where Id_Persona = 128431
 USP_MATRICULA_SEL_CONSOLIDADO_MATRICULA_ESTUDIANTE 114862,1329
 go
 
-sp_helptext USP_MATRICULA_SEL_CONSOLIDADO_MATRICULA_ESTUDIANTE
+sp_helptext USP_MATRICULA_RPT_BOLETA_NOTAS
+
+GO
+	EXEC USP_MATRICULA_RPT_BOLETA_NOTAS 228850,4133 
+
+go
+sp_helptext USP_MATRICULA_RPT_BOLETA_NOTAS
+
+/*
+	@ID_MATRICULA_ESTUDIANTE INT, 
+	@ID_PERIODOS_LECTIVOS_POR_INSTITUCION INT 
+
+*/
+
+use db_regia_5
+
+SELECT top 10 * from transaccional.matricula_estudiante where ID_MATRICULA_ESTUDIANTE = 228850
+
+SELECT * FROM transaccional.estudiante_institucion WHERE ID_ESTUDIANTE_INSTITUCION = 137891
+
+SELECT * FROM maestro.persona_institucion where ID_PERSONA_INSTITUCION = 151219
+
+select top 10 * from maestro.persona where nro_
+
+SELECT * FROM Security.Users where  Id_Persona = 150104
+
+go
+
+SELECT * FROM db_auxiliar.dbo.UVW_INSTITUCION where ID_INSTITUCION = 3610

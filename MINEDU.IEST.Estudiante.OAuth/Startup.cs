@@ -21,16 +21,22 @@ namespace MINEDU.IEST.Estudiante.OAuth
         public IWebHostEnvironment Environment { get; }
         public IConfiguration Configuration { get; }
 
+
+
         public Startup(IWebHostEnvironment environment, IConfiguration configuration)
         {
             Environment = environment;
             Configuration = configuration;
+            StaticConfig = configuration;
         }
+        public static IConfiguration StaticConfig { get; private set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
 
             BackEndConfig backEndConfig = Configuration.GetSection("BackEndConfig").Get<BackEndConfig>();
+
+
 
             services.AddControllersWithViews();
 
@@ -98,8 +104,8 @@ namespace MINEDU.IEST.Estudiante.OAuth
             if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
+            app.UseDatabaseErrorPage();
 
             app.UseCookiePolicy(new CookiePolicyOptions
             {

@@ -13,6 +13,10 @@ namespace MINEDU.IEST.Estudiante.OAuth
 {
     public static class Config
     {
+
+        public static string urlServerWeb => Startup.StaticConfig.GetSection("urlAppEstudiante:urlServerWeb").Value.ToString();
+        public static string urlBase => Startup.StaticConfig.GetSection("urlAppEstudiante:urlBase").Value.ToString();
+
         public static IEnumerable<IdentityResource> IdentityResources =>
                    new IdentityResource[]
                    {
@@ -74,7 +78,7 @@ namespace MINEDU.IEST.Estudiante.OAuth
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
                     AllowedScopes =
-                    { 
+                    {
                         "scope1",
                         "MINEDU.IEST.Estudiante.WebApiEst",
                         "MINEDU.IEST.Estudiante.OAuth.Api"
@@ -101,7 +105,7 @@ namespace MINEDU.IEST.Estudiante.OAuth
                     ClientName = "Sistema de Gestión para Estudiantes",
                     ClientId = "angular-app-estudiante",
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = new List<string>{ "http://localhost:4200/signin-callback", "http://localhost:4200/assets/silent-callback.html" },
+                    RedirectUris = new List<string>{ $"{urlBase}/signin-callback", $"{urlBase}/assets/silent-callback.html" },
                     RequirePkce = true,
                     AllowAccessTokensViaBrowser = true,
                     AllowedScopes =
@@ -111,9 +115,9 @@ namespace MINEDU.IEST.Estudiante.OAuth
                         "MINEDU.IEST.Estudiante.WebApiEst",
                         "MINEDU.IEST.Estudiante.OAuth.Api"
                     },
-                    AllowedCorsOrigins = { "http://localhost:4200" },
+                    AllowedCorsOrigins = { $"{urlServerWeb}" },
                     RequireClientSecret = false,
-                    PostLogoutRedirectUris = new List<string> { "http://localhost:4200/signout-callback" },
+                    PostLogoutRedirectUris = new List<string> { $"{urlBase}/signout-callback" },
                     RequireConsent = false,
                     AccessTokenLifetime = 3600
                 }
